@@ -594,19 +594,26 @@ void CPlayer_Precache(void)
   // precache all player sounds
   pdec->PrecacheSound(SOUND_WATER_ENTER        );
   pdec->PrecacheSound(SOUND_WATER_LEAVE        );
-  pdec->PrecacheSound(SOUND_WALK_L             );
-  pdec->PrecacheSound(SOUND_WALK_R             );
-  pdec->PrecacheSound(SOUND_WALK_SAND_L        );
-  pdec->PrecacheSound(SOUND_WALK_SAND_R        );
-  pdec->PrecacheSound(SOUND_SWIM_L             );
-  pdec->PrecacheSound(SOUND_SWIM_R             );
+  pdec->PrecacheSound(SOUND_WALK_1             );
+  pdec->PrecacheSound(SOUND_WALK_2             );
+  pdec->PrecacheSound(SOUND_WALK_3             );
+  pdec->PrecacheSound(SOUND_WALK_4             );
+  pdec->PrecacheSound(SOUND_WALK_SAND_1        );
+  pdec->PrecacheSound(SOUND_WALK_SAND_2        );
+  pdec->PrecacheSound(SOUND_WALK_SAND_3        );
+  pdec->PrecacheSound(SOUND_WALK_SAND_4        );
+  pdec->PrecacheSound(SOUND_SWIM_1             );
+  pdec->PrecacheSound(SOUND_SWIM_2             );
+  pdec->PrecacheSound(SOUND_SWIM_3             );
+  pdec->PrecacheSound(SOUND_SWIM_4             );
   pdec->PrecacheSound(SOUND_DIVE_L             );
   pdec->PrecacheSound(SOUND_DIVE_R             );
   pdec->PrecacheSound(SOUND_DIVEIN             );
   pdec->PrecacheSound(SOUND_DIVEOUT            );
   pdec->PrecacheSound(SOUND_DROWN              );
   pdec->PrecacheSound(SOUND_INHALE0            );
-  pdec->PrecacheSound(SOUND_JUMP               );
+  pdec->PrecacheSound(SOUND_JUMP_1             );
+  pdec->PrecacheSound(SOUND_JUMP_2             );
   pdec->PrecacheSound(SOUND_LAND               );
   pdec->PrecacheSound(SOUND_WOUNDWEAK          );
   pdec->PrecacheSound(SOUND_WOUNDMEDIUM        );
@@ -616,17 +623,25 @@ void CPlayer_Precache(void)
   pdec->PrecacheSound(SOUND_DEATHWATER         );
   pdec->PrecacheSound(SOUND_WATERAMBIENT       );
   pdec->PrecacheSound(SOUND_WATERBUBBLES       );
-  pdec->PrecacheSound(SOUND_WATERWALK_L        );
-  pdec->PrecacheSound(SOUND_WATERWALK_R        );
+  pdec->PrecacheSound(SOUND_WATERWALK_1        );
+  pdec->PrecacheSound(SOUND_WATERWALK_2        );
+  pdec->PrecacheSound(SOUND_WATERWALK_3        );
+  pdec->PrecacheSound(SOUND_WATERWALK_4        );
   pdec->PrecacheSound(SOUND_INHALE1            );
   pdec->PrecacheSound(SOUND_INHALE2            );
   pdec->PrecacheSound(SOUND_INFO               );
-  pdec->PrecacheSound(SOUND_WALK_GRASS_L       );
-  pdec->PrecacheSound(SOUND_WALK_GRASS_R       );
-  pdec->PrecacheSound(SOUND_WALK_WOOD_L        );
-  pdec->PrecacheSound(SOUND_WALK_WOOD_R        );
-  pdec->PrecacheSound(SOUND_WALK_SNOW_L        );
-  pdec->PrecacheSound(SOUND_WALK_SNOW_R        );
+  pdec->PrecacheSound(SOUND_WALK_GRASS_1       );
+  pdec->PrecacheSound(SOUND_WALK_GRASS_2       );
+  pdec->PrecacheSound(SOUND_WALK_GRASS_3       );
+  pdec->PrecacheSound(SOUND_WALK_GRASS_4       );
+  pdec->PrecacheSound(SOUND_WALK_WOOD_1        );
+  pdec->PrecacheSound(SOUND_WALK_WOOD_2        );
+  pdec->PrecacheSound(SOUND_WALK_WOOD_3        );
+  pdec->PrecacheSound(SOUND_WALK_WOOD_4        );
+  pdec->PrecacheSound(SOUND_WALK_SNOW_1        );
+  pdec->PrecacheSound(SOUND_WALK_SNOW_2        );
+  pdec->PrecacheSound(SOUND_WALK_SNOW_3        );
+  pdec->PrecacheSound(SOUND_WALK_SNOW_4        );
 //pdec->PrecacheSound(SOUND_HIGHSCORE          );
   pdec->PrecacheSound(SOUND_SNIPER_ZOOM        );
   pdec->PrecacheSound(SOUND_SNIPER_QZOOM       );
@@ -1198,39 +1213,56 @@ components:
 // gender specific sounds - make sure that offset is exactly 100 
  50 sound SOUND_WATER_ENTER     "Sounds\\Player\\WaterEnter.wav",
  51 sound SOUND_WATER_LEAVE     "Sounds\\Player\\WaterLeave.wav",
- 52 sound SOUND_WALK_L          "Sounds\\Player\\WalkL.wav",
- 53 sound SOUND_WALK_R          "Sounds\\Player\\WalkR.wav",
- 54 sound SOUND_SWIM_L          "Sounds\\Player\\SwimL.wav",
- 55 sound SOUND_SWIM_R          "Sounds\\Player\\SwimR.wav",
  56 sound SOUND_DIVE_L          "Sounds\\Player\\Dive.wav",
  57 sound SOUND_DIVE_R          "Sounds\\Player\\Dive.wav",
  58 sound SOUND_DIVEIN          "Sounds\\Player\\DiveIn.wav",
  59 sound SOUND_DIVEOUT         "Sounds\\Player\\DiveOut.wav",
  60 sound SOUND_DROWN           "Sounds\\Player\\Drown.wav",
  61 sound SOUND_INHALE0         "Sounds\\Player\\Inhale00.wav",
- 62 sound SOUND_JUMP            "Sounds\\Player\\Jump.wav",
- 63 sound SOUND_LAND            "Sounds\\Player\\Land.wav",
  66 sound SOUND_DEATH           "Sounds\\Player\\Death.wav",
  67 sound SOUND_DEATHWATER      "Sounds\\Player\\DeathWater.wav",
- 70 sound SOUND_WATERWALK_L     "Sounds\\Player\\WalkWaterL.wav",
- 71 sound SOUND_WATERWALK_R     "Sounds\\Player\\WalkWaterR.wav",
  72 sound SOUND_INHALE1         "Sounds\\Player\\Inhale01.wav",
  73 sound SOUND_INHALE2         "Sounds\\Player\\Inhale02.wav",
- 75 sound SOUND_WALK_SAND_L     "Sounds\\Player\\WalkSandL.wav",
- 76 sound SOUND_WALK_SAND_R     "Sounds\\Player\\WalkSandR.wav",
 //178 sound SOUND_HIGHSCORE       "Sounds\\Player\\HighScore.wav",
  80 sound SOUND_WOUNDWEAK       "Sounds\\Player\\WoundWeak.wav",
  81 sound SOUND_WOUNDMEDIUM     "Sounds\\Player\\WoundMedium.wav",
  82 sound SOUND_WOUNDSTRONG     "Sounds\\Player\\WoundStrong.wav",
  85 sound SOUND_WOUNDWATER      "Sounds\\Player\\WoundWater.wav",
- 86 sound SOUND_WALK_GRASS_L    "SoundsMP\\Player\\WalkGrassL.wav",
- 87 sound SOUND_WALK_GRASS_R    "SoundsMP\\Player\\WalkGrassR.wav",
- 88 sound SOUND_WALK_WOOD_L     "SoundsMP\\Player\\WalkWoodL.wav",
- 89 sound SOUND_WALK_WOOD_R     "SoundsMP\\Player\\WalkWoodR.wav",
- 90 sound SOUND_WALK_SNOW_L     "SoundsMP\\Player\\WalkSnowL.wav",
- 91 sound SOUND_WALK_SNOW_R     "SoundsMP\\Player\\WalkSnowR.wav",
  92 sound SOUND_BLOWUP          "SoundsMP\\Player\\BlowUp.wav",
- 
+
+ // plaguelands
+ 93 sound SOUND_WALK_1   "resources\\sounds\\player\\pl_step1.wav",
+ 94 sound SOUND_WALK_2   "resources\\sounds\\player\\pl_step2.wav",
+ 95 sound SOUND_WALK_3   "resources\\sounds\\player\\pl_step3.wav",
+ 96 sound SOUND_WALK_4   "resources\\sounds\\player\\pl_step4.wav",
+ 97 sound SOUND_JUMP_1   "resources\\sounds\\player\\pl_jump1.wav",
+ 98 sound SOUND_JUMP_2   "resources\\sounds\\player\\pl_jump2.wav",
+ 99 sound SOUND_LAND   "resources\\sounds\\player\\pl_jumpland2.wav",
+
+100 sound SOUND_WATERWALK_1   "resources\\sounds\\player\\pl_swim1.wav",
+101 sound SOUND_WATERWALK_2   "resources\\sounds\\player\\pl_swim2.wav",
+102 sound SOUND_WATERWALK_3   "resources\\sounds\\player\\pl_swim3.wav",
+103 sound SOUND_WATERWALK_4   "resources\\sounds\\player\\pl_swim4.wav",
+104 sound SOUND_WALK_SAND_1   "resources\\sounds\\player\\pl_dirt1.wav",
+105 sound SOUND_WALK_SAND_2   "resources\\sounds\\player\\pl_dirt2.wav",
+106 sound SOUND_WALK_SAND_3   "resources\\sounds\\player\\pl_dirt3.wav",
+107 sound SOUND_WALK_SAND_4   "resources\\sounds\\player\\pl_dirt4.wav",
+108 sound SOUND_WALK_GRASS_1   "resources\\sounds\\player\\pl_dirt1.wav",
+109 sound SOUND_WALK_GRASS_2   "resources\\sounds\\player\\pl_dirt2.wav",
+110 sound SOUND_WALK_GRASS_3   "resources\\sounds\\player\\pl_dirt3.wav",
+111 sound SOUND_WALK_GRASS_4   "resources\\sounds\\player\\pl_dirt4.wav",
+112 sound SOUND_WALK_WOOD_1   "resources\\sounds\\player\\pl_dirt1.wav",
+113 sound SOUND_WALK_WOOD_2   "resources\\sounds\\player\\pl_dirt2.wav",
+114 sound SOUND_WALK_WOOD_3   "resources\\sounds\\player\\pl_dirt3.wav",
+115 sound SOUND_WALK_WOOD_4   "resources\\sounds\\player\\pl_dirt4.wav",
+116 sound SOUND_WALK_SNOW_1   "resources\\sounds\\player\\pl_dirt1.wav",
+117 sound SOUND_WALK_SNOW_2   "resources\\sounds\\player\\pl_dirt2.wav",
+118 sound SOUND_WALK_SNOW_3   "resources\\sounds\\player\\pl_dirt3.wav",
+119 sound SOUND_WALK_SNOW_4   "resources\\sounds\\player\\pl_dirt4.wav",
+120 sound SOUND_SWIM_1   "resources\\sounds\\player\\pl_swim1.wav",
+121 sound SOUND_SWIM_2   "resources\\sounds\\player\\pl_swim2.wav",
+122 sound SOUND_SWIM_3   "resources\\sounds\\player\\pl_swim3.wav",
+123 sound SOUND_SWIM_4   "resources\\sounds\\player\\pl_swim4.wav",
 
 150 sound SOUND_F_WATER_ENTER   "SoundsMP\\Player\\Female\\WaterEnter.wav",
 151 sound SOUND_F_WATER_LEAVE   "SoundsMP\\Player\\Female\\WaterLeave.wav",
@@ -1293,6 +1325,21 @@ components:
 
 
 functions:
+
+   INDEX RandomStepSound(INDEX s1, INDEX s2, INDEX s3, INDEX s4) {
+       static int last = -1;           // хранит прошлый индекс
+       int r = rand() % 4;             // случайное число 0..3
+       if (r == last) {                // чтобы не повторялось подряд
+           r = (r + 1) % 4;
+       }
+       last = r;
+       switch (r) {
+           case 0: return s1;
+           case 1: return s2;
+           case 2: return s3;
+           case 3: return s4;
+       }
+   }
 
   INDEX GenderSound(INDEX iSound)
   {
@@ -4196,7 +4243,13 @@ functions:
           en_tmJumped<=_pTimer->CurrentTick() && en_penReference==NULL) {
         // play jump sound
         SetDefaultMouthPitch();
-        PlaySound(m_soMouth, GenderSound(SOUND_JUMP), SOF_3D);
+
+        INDEX sid;
+        switch (IRnd()%2) {
+            case 0: sid = SOUND_JUMP_1; break;
+            case 1: sid = SOUND_JUMP_2; break;
+        }
+        PlaySound(m_soMouth, GenderSound(sid), SOF_3D);
         if(_pNetwork->IsPlayerLocal(this)) {IFeel_PlayEffect("Jump");}
         // disallow jumping
         m_ulFlags&=~PLF_JUMPALLOWED;
@@ -4317,62 +4370,61 @@ functions:
       FLOAT fWantSpeed = en_vDesiredTranslationRelative.Length();
       FLOAT fGoesSpeed = en_vCurrentTranslationAbsolute.Length();
       BOOL bOnGround = (m_pstState == PST_STAND)||(m_pstState == PST_CROUCH);
-      BOOL bRunning = bOnGround && fWantSpeed>5.0f && fGoesSpeed>5.0f;
-      BOOL bWalking = bOnGround && !bRunning && fWantSpeed>2.0f && fGoesSpeed>2.0f;
+      BOOL bGrounded = bOnGround && (en_pbpoStandOn!=NULL) && (m_ulFlags & PLF_JUMPALLOWED);
+      BOOL bRunning = bGrounded && fWantSpeed>5.0f && fGoesSpeed>5.0f;
+      BOOL bWalking = bGrounded && !bRunning && fWantSpeed>2.0f && fGoesSpeed>2.0f;
       BOOL bSwimming = (m_pstState == PST_SWIM) && fWantSpeed>2.0f && fGoesSpeed>2.0f;
       BOOL bDiving = (m_pstState == PST_DIVE) && fWantSpeed>2.0f && fGoesSpeed>2.0f;
       TIME tmNow = _pTimer->CurrentTick();
-      INDEX iSoundWalkL = SOUND_WALK_L;
-      INDEX iSoundWalkR = SOUND_WALK_R;
+
+      // вместо iSoundWalkL/R — 4 варианта
+      INDEX iSoundWalk1 = SOUND_WALK_1;
+      INDEX iSoundWalk2 = SOUND_WALK_2;
+      INDEX iSoundWalk3 = SOUND_WALK_3;
+      INDEX iSoundWalk4 = SOUND_WALK_4;
+
       if ((ctDn.ct_ulFlags&CTF_SWIMABLE) && en_fImmersionFactor>=0.1f) {
-        iSoundWalkL = SOUND_WATERWALK_L;
-        iSoundWalkR = SOUND_WATERWALK_R;
-      } else if (en_pbpoStandOn!=NULL && 
-        en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_SAND) {
-        iSoundWalkL = SOUND_WALK_SAND_L;
-        iSoundWalkR = SOUND_WALK_SAND_R;
-      } else if (en_pbpoStandOn!=NULL && 
-        en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_RED_SAND) {
-        iSoundWalkL = SOUND_WALK_SAND_L;
-        iSoundWalkR = SOUND_WALK_SAND_R;
-      } else if (en_pbpoStandOn!=NULL && 
+        iSoundWalk1 = SOUND_WATERWALK_1; iSoundWalk2 = SOUND_WATERWALK_2;
+        iSoundWalk3 = SOUND_WATERWALK_3; iSoundWalk4 = SOUND_WATERWALK_4;
+      } else if (en_pbpoStandOn!=NULL && en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_SAND) {
+        iSoundWalk1 = SOUND_WALK_SAND_1; iSoundWalk2 = SOUND_WALK_SAND_2;
+        iSoundWalk3 = SOUND_WALK_SAND_3; iSoundWalk4 = SOUND_WALK_SAND_4;
+      } else if (en_pbpoStandOn!=NULL && en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_RED_SAND) {
+        iSoundWalk1 = SOUND_WALK_SAND_1; iSoundWalk2 = SOUND_WALK_SAND_2;
+        iSoundWalk3 = SOUND_WALK_SAND_3; iSoundWalk4 = SOUND_WALK_SAND_4;
+      } else if (en_pbpoStandOn!=NULL &&
         (en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_GRASS ||
          en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_GRASS_SLIDING ||
-         en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_GRASS_NOIMPACT )) {
-        iSoundWalkL = SOUND_WALK_GRASS_L;
-        iSoundWalkR = SOUND_WALK_GRASS_R;
-      } else if (en_pbpoStandOn!=NULL && 
-        en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_WOOD) {
-        iSoundWalkL = SOUND_WALK_WOOD_L;
-        iSoundWalkR = SOUND_WALK_WOOD_R;
-      } else if (en_pbpoStandOn!=NULL && 
-        en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_SNOW) {
-        iSoundWalkL = SOUND_WALK_SNOW_L;
-        iSoundWalkR = SOUND_WALK_SNOW_R;
+         en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_GRASS_NOIMPACT)) {
+        iSoundWalk1 = SOUND_WALK_GRASS_1; iSoundWalk2 = SOUND_WALK_GRASS_2;
+        iSoundWalk3 = SOUND_WALK_GRASS_3; iSoundWalk4 = SOUND_WALK_GRASS_4;
+      } else if (en_pbpoStandOn!=NULL && en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_WOOD) {
+        iSoundWalk1 = SOUND_WALK_WOOD_1; iSoundWalk2 = SOUND_WALK_WOOD_2;
+        iSoundWalk3 = SOUND_WALK_WOOD_3; iSoundWalk4 = SOUND_WALK_WOOD_4;
+      } else if (en_pbpoStandOn!=NULL && en_pbpoStandOn->bpo_bppProperties.bpp_ubSurfaceType==SURFACE_SNOW) {
+        iSoundWalk1 = SOUND_WALK_SNOW_1; iSoundWalk2 = SOUND_WALK_SNOW_2;
+        iSoundWalk3 = SOUND_WALK_SNOW_3; iSoundWalk4 = SOUND_WALK_SNOW_4;
       }
-      else {
-      }
-      iSoundWalkL+=m_iGender*GENDEROFFSET;
-      iSoundWalkR+=m_iGender*GENDEROFFSET;
+
+      // учёт пола
+      iSoundWalk1 += m_iGender*GENDEROFFSET;
+      iSoundWalk2 += m_iGender*GENDEROFFSET;
+      iSoundWalk3 += m_iGender*GENDEROFFSET;
+      iSoundWalk4 += m_iGender*GENDEROFFSET;
+
       if (bRunning) {
-        if (tmNow>m_tmMoveSound+plr_fRunSoundDelay) {
+        if (tmNow > m_tmMoveSound + plr_fRunSoundDelay) {
           m_tmMoveSound = tmNow;
           m_bMoveSoundLeft = !m_bMoveSoundLeft;
-          if (m_bMoveSoundLeft) {
-            PlaySound(m_soFootL, iSoundWalkL, SOF_3D);
-          } else {
-            PlaySound(m_soFootR, iSoundWalkR, SOF_3D);
-          }
+          INDEX sid = RandomStepSound(iSoundWalk1, iSoundWalk2, iSoundWalk3, iSoundWalk4);
+          PlaySound(m_bMoveSoundLeft ? m_soFootL : m_soFootR, sid, SOF_3D);
         }
       } else if (bWalking) {
-        if (tmNow>m_tmMoveSound+plr_fWalkSoundDelay) {
+        if (tmNow > m_tmMoveSound + plr_fWalkSoundDelay) {
           m_tmMoveSound = tmNow;
           m_bMoveSoundLeft = !m_bMoveSoundLeft;
-          if (m_bMoveSoundLeft) {
-            PlaySound(m_soFootL, iSoundWalkL, SOF_3D);
-          } else {
-            PlaySound(m_soFootR, iSoundWalkR, SOF_3D);
-          }
+          INDEX sid = RandomStepSound(iSoundWalk1, iSoundWalk2, iSoundWalk3, iSoundWalk4);
+          PlaySound(m_bMoveSoundLeft ? m_soFootL : m_soFootR, sid, SOF_3D);
         }
       } else if (bDiving) {
         if (tmNow>m_tmMoveSound+plr_fDiveSoundDelay) {
@@ -4388,11 +4440,8 @@ functions:
         if (tmNow>m_tmMoveSound+plr_fSwimSoundDelay) {
           m_tmMoveSound = tmNow;
           m_bMoveSoundLeft = !m_bMoveSoundLeft;
-          if (m_bMoveSoundLeft) {
-            PlaySound(m_soFootL, GenderSound(SOUND_SWIM_L), SOF_3D);
-          } else {
-            PlaySound(m_soFootR, GenderSound(SOUND_SWIM_R), SOF_3D);
-          }
+          INDEX sid = RandomStepSound(iSoundWalk1, iSoundWalk2, iSoundWalk3, iSoundWalk4);
+          PlaySound(m_bMoveSoundLeft ? m_soFootL : m_soFootR, sid, SOF_3D);
         }
       }
     
@@ -6741,7 +6790,7 @@ procedures:
           JumpFromBouncer(this, eTouch.penOther);
           // play jump sound
           SetDefaultMouthPitch();
-          PlaySound(m_soMouth, GenderSound(SOUND_JUMP), SOF_3D);
+          PlaySound(m_soMouth, GenderSound(SOUND_JUMP_1), SOF_3D);
           if(_pNetwork->IsPlayerLocal(this)) {IFeel_PlayEffect("Jump");}
         }
         resume;
