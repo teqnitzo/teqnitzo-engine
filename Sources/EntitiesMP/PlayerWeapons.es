@@ -670,8 +670,8 @@ components:
  34 texture TEXTURE_COLTMAIN            "Models\\Weapons\\Colt\\ColtMain.tex",
  35 texture TEXTURE_COLTCOCK            "Models\\Weapons\\Colt\\ColtCock.tex",
  36 texture TEXTURE_COLTBULLETS         "Models\\Weapons\\Colt\\ColtBullets.tex",
- 37 sound   SOUND_COLT_FIRE             "Models\\Weapons\\Colt\\Sounds\\Fire.wav",
- 38 sound   SOUND_COLT_RELOAD           "Models\\Weapons\\Colt\\Sounds\\Reload.wav",
+ 37 sound   SOUND_COLT_FIRE             "resources\\sounds\\weapons\\colt\\shot.wav",
+ 38 sound   SOUND_COLT_RELOAD           "resources\\sounds\\weapons\\colt\\reload.wav",
 
 // ************** SINGLE SHOTGUN ************
  40 model   MODEL_SINGLESHOTGUN         "Models\\Weapons\\SingleShotgun\\SingleShotgun.mdl",
@@ -1071,10 +1071,10 @@ functions:
   void WeaponMovingOffset(FLOAT3D &plPos)
   {
     CPlayerAnimator &plan = (CPlayerAnimator&)*((CPlayer&)*m_penPlayer).m_penAnimator;
-    FLOAT fXOffset = Lerp(plan.m_fMoveLastBanking, plan.m_fMoveBanking, _pTimer->GetLerpFactor()) * -0.02f;
+    FLOAT fXOffset = Lerp(plan.m_fMoveLastBanking, plan.m_fMoveBanking, _pTimer->GetLerpFactor()) * -0.03f;
     FLOAT fYOffset = Lerp(plan.m_fWeaponYLastOffset, plan.m_fWeaponYOffset, _pTimer->GetLerpFactor()) * 0.15f;
-    fYOffset += (fXOffset * fXOffset) * 30.0f;
-    plPos(1) += fXOffset;
+    fYOffset += (fXOffset * fXOffset) * 1.0f;
+    plPos(3) += fXOffset;
     plPos(2) += fYOffset;
     // apply grenade launcher pumping
     if( m_iCurrentWeapon == WEAPON_GRENADELAUNCHER)
