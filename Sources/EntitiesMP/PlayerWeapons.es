@@ -290,7 +290,8 @@ void CPlayerWeapons_Precache(ULONG ulAvailable)
     pdec->PrecacheTexture(TEXTURE_COLTMAIN          );  
     pdec->PrecacheTexture(TEXTURE_COLTCOCK          );  
     pdec->PrecacheTexture(TEXTURE_COLTBULLETS       );  
-    pdec->PrecacheSound(SOUND_COLT_FIRE             );
+    pdec->PrecacheSound(SOUND_COLT_FIRE_1             );
+    pdec->PrecacheSound(SOUND_COLT_FIRE_2             );
     pdec->PrecacheSound(SOUND_COLT_RELOAD           );
   }
 
@@ -670,8 +671,9 @@ components:
  34 texture TEXTURE_COLTMAIN            "Models\\Weapons\\Colt\\ColtMain.tex",
  35 texture TEXTURE_COLTCOCK            "Models\\Weapons\\Colt\\ColtCock.tex",
  36 texture TEXTURE_COLTBULLETS         "Models\\Weapons\\Colt\\ColtBullets.tex",
- 37 sound   SOUND_COLT_FIRE             "resources\\sounds\\weapons\\colt\\shot.wav",
- 38 sound   SOUND_COLT_RELOAD           "resources\\sounds\\weapons\\colt\\reload.wav",
+ 37 sound   SOUND_COLT_FIRE_1             "resources\\sounds\\weapons\\colt\\shot1.wav",
+ 38 sound   SOUND_COLT_FIRE_2             "resources\\sounds\\weapons\\colt\\shot2.wav",
+ 39 sound   SOUND_COLT_RELOAD           "resources\\sounds\\weapons\\colt\\reload.wav",
 
 // ************** SINGLE SHOTGUN ************
  40 model   MODEL_SINGLESHOTGUN         "Models\\Weapons\\SingleShotgun\\SingleShotgun.mdl",
@@ -4121,7 +4123,13 @@ procedures:
 
     // sound
     CPlayer &pl = (CPlayer&)*m_penPlayer;
-    PlaySound(pl.m_soWeapon0, SOUND_COLT_FIRE, SOF_3D|SOF_VOLUMETRIC);
+
+    INDEX iSoundFireSolo;
+        switch (IRnd()%2) {
+          case 0: iSoundFireSolo = SOUND_COLT_FIRE_1; break;
+          case 1: iSoundFireSolo = SOUND_COLT_FIRE_2; break;
+        }
+    PlaySound(pl.m_soWeapon0, iSoundFireSolo, SOF_3D|SOF_VOLUMETRIC);
 
     /*
     if( pl.m_pstState!=PST_DIVE)
@@ -4196,7 +4204,13 @@ procedures:
     PlayLightAnim(LIGHT_ANIM_COLT_SHOTGUN, 0);
     // sound
     CPlayer &plSnd = (CPlayer&)*m_penPlayer;
-    PlaySound(plSnd.m_soWeapon0, SOUND_COLT_FIRE, SOF_3D|SOF_VOLUMETRIC);
+
+    INDEX iSoundFire1;
+        switch (IRnd()%2) {
+          case 0: iSoundFire1 = SOUND_COLT_FIRE_1; break;
+          case 1: iSoundFire1 = SOUND_COLT_FIRE_2; break;
+        }
+    PlaySound(plSnd.m_soWeapon0, iSoundFire1, SOF_3D|SOF_VOLUMETRIC);
 
     // random colt fire
     switch (IRnd()%3) {
@@ -4233,7 +4247,13 @@ procedures:
     m_bMirrorFire = FALSE;
     // sound
     CPlayer &pl = (CPlayer&)*m_penPlayer;
-    PlaySound(pl.m_soWeapon1, SOUND_COLT_FIRE, SOF_3D|SOF_VOLUMETRIC);
+
+    INDEX iSoundFire2;
+        switch (IRnd()%2) {
+          case 0: iSoundFire2 = SOUND_COLT_FIRE_1; break;
+          case 1: iSoundFire2 = SOUND_COLT_FIRE_2; break;
+        }
+    PlaySound(pl.m_soWeapon1, iSoundFire2, SOF_3D|SOF_VOLUMETRIC);
 
     m_moWeaponSecond.PlayAnim(m_iAnim, 0);
     autowait(m_moWeapon.GetAnimLength(m_iAnim)/2);    // wait half of the anim
