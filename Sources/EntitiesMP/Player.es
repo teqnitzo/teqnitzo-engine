@@ -1155,6 +1155,9 @@ properties:
  167 FLOAT m_tmInvulnerabilityMax = 30.0f,
  168 FLOAT m_tmSeriousDamageMax   = 40.0f,
  169 FLOAT m_tmSeriousSpeedMax    = 20.0f,
+ 170 FLOAT m_tmRecoilShakeStart = 0.0f, // used to determine when to stop shaking due to recoil
+ 172 FLOAT m_fRecoilShakeStrength0 = 0.0f, // used to determine when to stop shaking due to recoil
+ 172 FLOAT m_fRecoilShakeStrength = 0.0f, // used to determine when to stop shaking due to recoil
 
  180 FLOAT m_tmChainShakeEnd = 0.0f, // used to determine when to stop shaking due to chainsaw damage
  181 FLOAT m_fChainShakeStrength = 1.0f, // strength of shaking
@@ -2307,6 +2310,15 @@ functions:
   {
     // chainsaw shaking
     FLOAT fT = _pTimer->GetLerpedCurrentTick();
+
+    // каждый кадр
+    float t = _pTimer->GetLerpedCurrentTick() - m_tmRecoilShakeStart;
+    float lambda = 5.0f; // скорость затухания, подбирается
+    m_fRecoilShakeStrength = m_fRecoilShakeStrength0 * expf(-lambda * t);
+
+    plViewer.pl_OrientationAngle(1) += m_fRecoilShakeStrength * 0.01;
+    plViewer.pl_OrientationAngle(2) += m_fRecoilShakeStrength;
+
     if (fT<m_tmChainShakeEnd)
     {
       m_fChainsawShakeDX = 0.03f*m_fChainShakeStrength*SinFast(fT*m_fChainShakeFreqMod*3300.0f);

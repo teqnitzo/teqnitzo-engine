@@ -4113,6 +4113,10 @@ procedures:
     FireOneBullet(wpn_fFX[WEAPON_COLT], wpn_fFY[WEAPON_COLT], 500.0f,
       ((GetSP()->sp_bCooperative) ? 10.0f : 20.0f));
 
+    // shake view
+    ((CPlayer&)*m_penPlayer).m_tmRecoilShakeStart = _pTimer->GetLerpedCurrentTick();
+    ((CPlayer&)*m_penPlayer).m_fRecoilShakeStrength0 = 4.0f;
+    ((CPlayer&)*m_penPlayer).m_fRecoilShakeStrength = 0.0f;
 
     if(_pNetwork->IsPlayerLocal(m_penPlayer)) {IFeel_PlayEffect("Colt_fire");}
     DoRecoil();
