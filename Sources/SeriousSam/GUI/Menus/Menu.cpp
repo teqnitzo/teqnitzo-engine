@@ -254,8 +254,8 @@ void InitializeMenus(void)
     _fdTitle.SetLineSpacing( 0);
 
     // load menu sounds
-    _psdSelect = _pSoundStock->Obtain_t( CTFILENAME("Sounds\\Menu\\Select.wav"));
-    _psdPress  = _pSoundStock->Obtain_t( CTFILENAME("Sounds\\Menu\\Press.wav"));
+    _psdSelect = _pSoundStock->Obtain_t( CTFILENAME("resources\\sounds\\menu\\menu1.wav"));
+    _psdPress  = _pSoundStock->Obtain_t( CTFILENAME("resources\\sounds\\menu\\menu2.wav"));
     _psoMenuSound = new CSoundObject;
 
     // initialize and load menu textures
