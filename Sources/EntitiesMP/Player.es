@@ -4429,23 +4429,23 @@ functions:
           m_tmMoveSound = tmNow;
           m_bMoveSoundLeft = !m_bMoveSoundLeft;
           INDEX sid = RandomStepSound(iSoundWalk1, iSoundWalk2, iSoundWalk3, iSoundWalk4);
-          PlaySound(m_bMoveSoundLeft ? m_soFootL : m_soFootR, sid, SOF_3D);
+          PlaySound(m_bMoveSoundLeft ? m_soFootL : m_soFootR, sid, SOF_3D|SOF_VOLUMETRIC);
         }
       } else if (bWalking) {
         if (tmNow > m_tmMoveSound + plr_fWalkSoundDelay) {
           m_tmMoveSound = tmNow;
           m_bMoveSoundLeft = !m_bMoveSoundLeft;
           INDEX sid = RandomStepSound(iSoundWalk1, iSoundWalk2, iSoundWalk3, iSoundWalk4);
-          PlaySound(m_bMoveSoundLeft ? m_soFootL : m_soFootR, sid, SOF_3D);
+          PlaySound(m_bMoveSoundLeft ? m_soFootL : m_soFootR, sid, SOF_3D|SOF_VOLUMETRIC);
         }
       } else if (bDiving) {
         if (tmNow>m_tmMoveSound+plr_fDiveSoundDelay) {
           m_tmMoveSound = tmNow;
           m_bMoveSoundLeft = !m_bMoveSoundLeft;
           if (m_bMoveSoundLeft) {
-            PlaySound(m_soFootL, GenderSound(SOUND_DIVE_L), SOF_3D);
+            PlaySound(m_soFootL, GenderSound(SOUND_DIVE_L), SOF_3D|SOF_VOLUMETRIC);
           } else {
-            PlaySound(m_soFootR, GenderSound(SOUND_DIVE_R), SOF_3D);
+            PlaySound(m_soFootR, GenderSound(SOUND_DIVE_R), SOF_3D|SOF_VOLUMETRIC);
           }
         }
       } else if (bSwimming) {
@@ -4453,7 +4453,7 @@ functions:
           m_tmMoveSound = tmNow;
           m_bMoveSoundLeft = !m_bMoveSoundLeft;
           INDEX sid = RandomStepSound(iSoundWalk1, iSoundWalk2, iSoundWalk3, iSoundWalk4);
-          PlaySound(m_bMoveSoundLeft ? m_soFootL : m_soFootR, sid, SOF_3D);
+          PlaySound(m_bMoveSoundLeft ? m_soFootL : m_soFootR, sid, SOF_3D|SOF_VOLUMETRIC);
         }
       }
     
@@ -4464,7 +4464,7 @@ functions:
         if (m_tmMouthSoundLast+2.0f<tmNow) {
           m_tmMouthSoundLast = tmNow;
           SetRandomMouthPitch(0.9f, 1.1f);
-          PlaySound(m_soMouth, GenderSound(SOUND_DROWN), SOF_3D);
+          PlaySound(m_soMouth, GenderSound(SOUND_DROWN), SOF_3D|SOF_VOLUMETRIC);
         }
       }
 
