@@ -614,6 +614,7 @@ properties:
 236 BOOL  m_bSniping = FALSE,
 237 FLOAT m_fMinimumZoomFOV  = 53.1f,
 238 FLOAT m_tmLastSniperFire = 0.0f,
+239 FLOAT m_tmFlareAdded = -1.0f,             // for better flare add/remove
 // pipebomb
 //235 CEntityPointer m_penPipebomb,
 //236 INDEX m_bPipeBombDropped = FALSE,
@@ -1482,9 +1483,10 @@ functions:
     // add flare
     if (pen->m_iFlare==FLARE_ADD) {
       pen->m_iFlare = FLARE_REMOVE;
+      pen->m_tmFlareAdded = _pTimer->CurrentTick();
       switch(m_iCurrentWeapon) {
         case WEAPON_DOUBLECOLT: case WEAPON_COLT:
-          ShowFlare(m_moWeapon, COLT_ATTACHMENT_COLT, COLTMAIN_ATTACHMENT_FLARE, 0.75f);
+          ShowFlare(m_moWeapon, COLT_ATTACHMENT_COLT, COLTMAIN_ATTACHMENT_FLARE, 0.4f);
           break;
         case WEAPON_SINGLESHOTGUN:
           ShowFlare(m_moWeapon, SINGLESHOTGUN_ATTACHMENT_BARRELS, BARRELS_ATTACHMENT_FLARE, 1.0f);
@@ -1503,7 +1505,7 @@ functions:
           break;
       }
     // remove
-    } else if (pen->m_iFlare==FLARE_REMOVE) {
+    } else if (pen->m_iFlare==FLARE_REMOVE && _pTimer->CurrentTick()>pen->m_tmFlareAdded+_pTimer->TickQuantum) {
       switch(m_iCurrentWeapon) {
         case WEAPON_DOUBLECOLT: case WEAPON_COLT:
           HideFlare(m_moWeapon, COLT_ATTACHMENT_COLT, COLTMAIN_ATTACHMENT_FLARE);
