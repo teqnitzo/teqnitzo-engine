@@ -279,7 +279,7 @@ components:
  15 model   MODEL_BULLET_HIT      "Models\\Effects\\BulletParticles\\BulletParticles.mdl",
  16 texture TEXTURE_BULLET_HIT    "Models\\Effects\\BulletParticles\\BulletParticles.tex",
  18 model   MODEL_BULLET_STAIN    "Models\\Effects\\BulletOnTheWall\\Bullet.mdl",
- 19 texture TEXTURE_BULLET_STAIN  "Models\\Effects\\BulletOnTheWall\\Bullet.tex",
+ 19 texture TEXTURE_BULLET_STAIN  "resources\\textures\\effects\\hit.tex",
  70 texture TEXTURE_BULLET_TRAIL  "Models\\Effects\\BulletTrail\\BulletTrail.tex",
  71 model   MODEL_BULLET_TRAIL    "Models\\Effects\\BulletTrail\\BulletTrail.mdl",
 
@@ -287,7 +287,7 @@ components:
  91 sound   SOUND_BULLET_SAND     "Sounds\\Weapons\\BulletHitSand.wav",
  92 sound   SOUND_BULLET_WATER    "Sounds\\Weapons\\BulletHitWater.wav",
  93 sound   SOUND_BULLET_FLESH    "Sounds\\Weapons\\_BulletHitFlesh.wav",
- 94 texture TEXTURE_BULLET_SAND   "Models\\Effects\\BulletOnTheWall\\BulletSand.tex",
+ 94 texture TEXTURE_BULLET_SAND   "resources\\textures\\effects\\hit.tex",
  95 sound   SOUND_BULLET_GRASS    "SoundsMP\\Weapons\\BulletHitGrass.wav",
  96 sound   SOUND_BULLET_WOOD     "SoundsMP\\Weapons\\BulletHitWood.wav",
  97 sound   SOUND_BULLET_SNOW     "SoundsMP\\Weapons\\BulletHitSnow.wav",

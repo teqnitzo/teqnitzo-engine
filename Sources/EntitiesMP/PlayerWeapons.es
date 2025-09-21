@@ -270,6 +270,8 @@ void CPlayerWeapons_Precache(ULONG ulAvailable)
   pdec->PrecacheModel(MODEL_FLARE01);
   pdec->PrecacheClass(CLASS_BULLET);
   pdec->PrecacheSound(SOUND_SILENCE);
+  pdec->PrecacheSound(SOUND_KNIFE_STONE_1);
+  pdec->PrecacheSound(SOUND_KNIFE_STONE_2);
 
   // precache other weapons if available
   if ( ulAvailable&(1<<(WEAPON_KNIFE-1)) ) {
@@ -555,6 +557,7 @@ properties:
  23 BOOL  m_bSniperZoom = FALSE,        // zoom sniper
  24 FLOAT m_fSniperFOV      = 90.0f,    // sniper FOV
  28 FLOAT m_fSniperFOVlast  = 90.0f,    // sniper FOV for lerping
+ 29 CSoundObject m_soEffect,        // sound channel
 
  18 CTString m_strLastTarget   = "",      // string for last target
  19 FLOAT m_tmTargetingStarted = -99.0f,  // when targeting started
@@ -663,7 +666,9 @@ components:
  24 sound   SOUND_KNIFE_HIGH            "Models\\Weapons\\Knife\\Sounds\\High.wav",
  25 sound   SOUND_KNIFE_LONG            "Models\\Weapons\\Knife\\Sounds\\Long.wav",
  26 sound   SOUND_KNIFE_LOW             "Models\\Weapons\\Knife\\Sounds\\Low.wav",
- 
+ 27 sound   SOUND_KNIFE_STONE_1           "resources\\sounds\\weapons\\knife\\knife_wall1.wav",
+ 28 sound   SOUND_KNIFE_STONE_2           "resources\\sounds\\weapons\\knife\\knife_wall2.wav",
+
 // ************** COLT **************
  30 model   MODEL_COLT                  "Models\\Weapons\\Colt\\Colt.mdl",
  31 model   MODEL_COLTCOCK              "Models\\Weapons\\Colt\\ColtCock.mdl",
@@ -1911,12 +1916,34 @@ functions:
         if (i==0) {
           if(crRay.cr_penHit->GetRenderType()==RT_BRUSH)
           {
-            INDEX iSurfaceType=crRay.cr_pbpoBrushPolygon->bpo_bppProperties.bpp_ubSurfaceType;
-            EffectParticlesType eptType=GetParticleEffectTypeForSurface(iSurfaceType);
-            
-            FLOAT3D vNormal=crRay.cr_pbpoBrushPolygon->bpo_pbplPlane->bpl_plAbsolute;
-            FLOAT3D vReflected = vDir-vNormal*(2.0f*(vNormal%vDir));
-            ((CPlayer&)*m_penPlayer).AddBulletSpray( vBase+vFront, eptType, vReflected);
+            INDEX iSurfaceType = crRay.cr_pbpoBrushPolygon->bpo_bppProperties.bpp_ubSurfaceType;
+            EffectParticlesType eptType = GetParticleEffectTypeForSurface(iSurfaceType);
+
+            FLOAT3D vNormal = crRay.cr_pbpoBrushPolygon->bpo_pbplPlane->bpl_plAbsolute;
+
+            // направление удара = направление используемого луча
+            FLOAT3D vHitDirection = (vDest[i] - vBase).Normalize();
+
+            // спрей от удара по стене
+            FLOAT3D vReflected = vDir - vNormal * (2.0f * (vNormal % vDir));
+            //((CPlayer&)*m_penPlayer).AddBulletSpray(vBase + vFront, eptType, vReflected);
+
+            // тип эффекта как у пули
+            BulletHitType bhtType = (BulletHitType) GetBulletHitTypeForSurface(iSurfaceType);
+
+            // ВАЖНО: не создавать новый CCastRay! используем уже откастанный crRay
+            //SpawnHitTypeEffect(this, bhtType, FALSE, vNormal, crRay.cr_vHit, vHitDirection, FLOAT3D(0.0f, 0.0f, 0.0f));
+            AnglesToDirectionVector(GetPlacement().pl_OrientationAngle, vHitDirection);
+
+            m_soEffect.Set3DParameters(20.0f, 10.0f, 1.0f, 1.0f+FRnd()*0.2f);
+
+            INDEX iHitSound;
+            INDEX rnd = IRnd()%2;
+            switch (rnd) {
+              case 0: iHitSound = SOUND_KNIFE_STONE_1; break;
+              case 1: iHitSound = SOUND_KNIFE_STONE_2; break;
+            }
+            PlaySound(m_soEffect, iHitSound, SOF_3D|SOF_VOLUMETRIC);
           }
           else if(crRay.cr_penHit->GetRenderType()==RT_MODEL)
           {
