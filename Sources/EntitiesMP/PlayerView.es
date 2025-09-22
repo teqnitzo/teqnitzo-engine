@@ -107,9 +107,9 @@ functions:
 
     if (m_iViewType == VT_3RDPERSONVIEW) {
       // little above player eyes so it can be seen where he is firing
-      pl.pl_OrientationAngle(2) -= 12.0f; //10.0f;
+      pl.pl_OrientationAngle(2) -= 15.0f; //10.0f;
       pl.pl_PositionVector(2) += 1.0f;
-      fDistance = 4.2f;//5.75f;
+      fDistance = 3.0f;//5.75f;
       bFollowCrossHair = TRUE;
     // death
     } else if (m_iViewType == VT_PLAYERDEATH) {

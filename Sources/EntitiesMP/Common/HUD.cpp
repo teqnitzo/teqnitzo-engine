@@ -842,12 +842,12 @@ extern void DrawHUD( const CPlayer *penPlayerCurrent, CDrawPort *pdpCurrent, BOO
   fRow = pixBottomBound-fHalfUnit;
   fCol = pixLeftBound+fHalfUnit;
   colDefault = AddShaker( 5, fValue, penLast->m_iLastHealth, penLast->m_tmHealthChanged, fMoverX, fMoverY);
-  HUD_DrawBorder( fCol+fMoverX, fRow+fMoverY, fOneUnit, fOneUnit, colBorder);
+  //HUD_DrawBorder( fCol+fMoverX, fRow+fMoverY, fOneUnit, fOneUnit, colBorder);
   fCol += fAdvUnit+fChrUnit*3/2 -fHalfUnit;
-  HUD_DrawBorder( fCol, fRow, fChrUnit*3, fOneUnit, colBorder);
-  HUD_DrawText( fCol, fRow, strValue, colDefault, fNormValue);
+  //HUD_DrawBorder( fCol, fRow, fChrUnit*3, fOneUnit, colBorder);
+  //HUD_DrawText( fCol, fRow, strValue, colDefault, fNormValue);
   fCol -= fAdvUnit+fChrUnit*3/2 -fHalfUnit;
-  HUD_DrawIcon( fCol+fMoverX, fRow+fMoverY, _toHealth, C_WHITE /*_colHUD*/, fNormValue, TRUE);
+  //HUD_DrawIcon( fCol+fMoverX, fRow+fMoverY, _toHealth, C_WHITE /*_colHUD*/, fNormValue, TRUE);
 
   // prepare and draw armor info (eventually)
   fValue = _penPlayer->m_fArmor;
@@ -912,8 +912,8 @@ extern void DrawHUD( const CPlayer *penPlayerCurrent, CDrawPort *pdpCurrent, BOO
     // draw only knife or colt icons (ammo is irrelevant)
     fRow = pixBottomBound-fHalfUnit;
     fCol = 205 + fHalfUnit;
-    HUD_DrawBorder( fCol, fRow, fOneUnit, fOneUnit, colBorder);
-    HUD_DrawIcon(   fCol, fRow, *ptoCurrentWeapon, C_WHITE /*_colHUD*/, fNormValue, FALSE);
+    //HUD_DrawBorder( fCol, fRow, fOneUnit, fOneUnit, colBorder);
+    //HUD_DrawIcon(   fCol, fRow, *ptoCurrentWeapon, C_WHITE /*_colHUD*/, fNormValue, FALSE);
   }
 
 
@@ -1273,14 +1273,14 @@ extern void DrawHUD( const CPlayer *penPlayerCurrent, CDrawPort *pdpCurrent, BOO
   }
 
   // prepare and draw score or frags info 
-  strValue.PrintF( "%d", iScore);
-  fRow = pixTopBound  +fHalfUnit;
-  fCol = pixLeftBound +fHalfUnit;
-  fAdv = fAdvUnit+ fChrUnit*fWidthAdj/2 -fHalfUnit;
-  HUD_DrawBorder( fCol,      fRow, fOneUnit,           fOneUnit, colBorder);
-  HUD_DrawBorder( fCol+fAdv, fRow, fChrUnit*fWidthAdj, fOneUnit, colBorder);
-  HUD_DrawText(   fCol+fAdv, fRow, strValue, colScore, 1.0f);
-  HUD_DrawIcon(   fCol,      fRow, _toFrags, C_WHITE /*colScore*/, 1.0f, FALSE);
+  //strValue.PrintF( "%d", iScore);
+  //fRow = pixTopBound  +fHalfUnit;
+  //fCol = pixLeftBound +fHalfUnit;
+  //fAdv = fAdvUnit+ fChrUnit*fWidthAdj/2 -fHalfUnit;
+  //HUD_DrawBorder( fCol,      fRow, fOneUnit,           fOneUnit, colBorder);
+  //HUD_DrawBorder( fCol+fAdv, fRow, fChrUnit*fWidthAdj, fOneUnit, colBorder);
+  //HUD_DrawText(   fCol+fAdv, fRow, strValue, colScore, 1.0f);
+  //HUD_DrawIcon(   fCol,      fRow, _toFrags, C_WHITE /*colScore*/, 1.0f, FALSE);
 
   // eventually draw mana info 
   if( bScoreMatch || bFragMatch) {
@@ -1288,10 +1288,10 @@ extern void DrawHUD( const CPlayer *penPlayerCurrent, CDrawPort *pdpCurrent, BOO
     fRow = pixTopBound  + fNextUnit+fHalfUnit;
     fCol = pixLeftBound + fHalfUnit;
     fAdv = fAdvUnit+ fChrUnit*fWidthAdj/2 -fHalfUnit;
-    HUD_DrawBorder( fCol,      fRow, fOneUnit,           fOneUnit, colBorder);
-    HUD_DrawBorder( fCol+fAdv, fRow, fChrUnit*fWidthAdj, fOneUnit, colBorder);
-    HUD_DrawText(   fCol+fAdv, fRow, strValue,  colMana, 1.0f);
-    HUD_DrawIcon(   fCol,      fRow, _toDeaths, C_WHITE /*colMana*/, 1.0f, FALSE);
+    //HUD_DrawBorder( fCol,      fRow, fOneUnit,           fOneUnit, colBorder);
+    //HUD_DrawBorder( fCol+fAdv, fRow, fChrUnit*fWidthAdj, fOneUnit, colBorder);
+    //HUD_DrawText(   fCol+fAdv, fRow, strValue,  colMana, 1.0f);
+    //HUD_DrawIcon(   fCol,      fRow, _toDeaths, C_WHITE /*colMana*/, 1.0f, FALSE);
   }
 
   // if single player or cooperative mode
@@ -1303,10 +1303,10 @@ extern void DrawHUD( const CPlayer *penPlayerCurrent, CDrawPort *pdpCurrent, BOO
     fRow = pixTopBound+fHalfUnit;
     fCol = 320.0f-fOneUnit-fChrUnit*8/2;
     fAdv = fAdvUnit+ fChrUnit*8/2 -fHalfUnit;
-    HUD_DrawBorder( fCol,      fRow, fOneUnit,   fOneUnit, colBorder);
-    HUD_DrawBorder( fCol+fAdv, fRow, fChrUnit*8, fOneUnit, colBorder);
-    HUD_DrawText(   fCol+fAdv, fRow, strValue, NONE, bBeating ? 0.0f : 1.0f);
-    HUD_DrawIcon(   fCol,      fRow, _toHiScore, C_WHITE /*_colHUD*/, 1.0f, FALSE);
+    //HUD_DrawBorder( fCol,      fRow, fOneUnit,   fOneUnit, colBorder);
+    //HUD_DrawBorder( fCol+fAdv, fRow, fChrUnit*8, fOneUnit, colBorder);
+    //HUD_DrawText(   fCol+fAdv, fRow, strValue, NONE, bBeating ? 0.0f : 1.0f);
+    //HUD_DrawIcon(   fCol,      fRow, _toHiScore, C_WHITE /*_colHUD*/, 1.0f, FALSE);
 
     // prepare and draw unread messages
     if( hud_bShowMessages && _penPlayer->m_ctUnreadMessages>0) {
@@ -1332,10 +1332,10 @@ extern void DrawHUD( const CPlayer *penPlayerCurrent, CDrawPort *pdpCurrent, BOO
         col = LerpColor(_colHUD, C_WHITE|0xFF, fRatio);
       }
       fAdv = fAdvUnit+ fChrUnit*4/2 -fHalfUnit;
-      HUD_DrawBorder( fCol,      fRow, fOneUnit,   fOneUnit, col);
-      HUD_DrawBorder( fCol+fAdv, fRow, fChrUnit*4, fOneUnit, col);
-      HUD_DrawText(   fCol+fAdv, fRow, strValue,   col, 1.0f);
-      HUD_DrawIcon(   fCol,      fRow, _toMessage, C_WHITE /*col*/, 0.0f, TRUE);
+      //HUD_DrawBorder( fCol,      fRow, fOneUnit,   fOneUnit, col);
+      //HUD_DrawBorder( fCol+fAdv, fRow, fChrUnit*4, fOneUnit, col);
+      //HUD_DrawText(   fCol+fAdv, fRow, strValue,   col, 1.0f);
+      //HUD_DrawIcon(   fCol,      fRow, _toMessage, C_WHITE /*col*/, 0.0f, TRUE);
     }
   }
 

@@ -4931,7 +4931,7 @@ functions:
       plView = ((CPlayerView&)*m_pen3rdPersonView).GetPlacement();
     }
     if (!bSniping) {
-      ((CPlayerWeapons&)*m_penWeapons).RenderCrosshair(prProjection, pdp, plView);
+      //((CPlayerWeapons&)*m_penWeapons).RenderCrosshair(prProjection, pdp, plView);
     }
 
     // get your prediction tail
