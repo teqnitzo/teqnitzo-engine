@@ -557,7 +557,6 @@ properties:
  23 BOOL  m_bSniperZoom = FALSE,        // zoom sniper
  24 FLOAT m_fSniperFOV      = 90.0f,    // sniper FOV
  28 FLOAT m_fSniperFOVlast  = 90.0f,    // sniper FOV for lerping
- 29 CSoundObject m_soEffect,        // sound channel
 
  18 CTString m_strLastTarget   = "",      // string for last target
  19 FLOAT m_tmTargetingStarted = -99.0f,  // when targeting started
@@ -892,6 +891,10 @@ functions:
   {
 //    CPlayerAnimator &plan = (CPlayerAnimator&)*((CPlayer&)*m_penPlayer).m_penAnimator;
 //    plan.m_fRecoilSpeed += wpn_fRecoilSpeed[m_iCurrentWeapon];
+    // shake view
+    ((CPlayer&)*m_penPlayer).m_tmRecoilShakeStart = _pTimer->GetLerpedCurrentTick();
+    ((CPlayer&)*m_penPlayer).m_fRecoilShakeStrength0 = 4.0f;
+    ((CPlayer&)*m_penPlayer).m_fRecoilShakeStrength = 0.0f;
   }
 
   // 
@@ -1932,18 +1935,15 @@ functions:
             BulletHitType bhtType = (BulletHitType) GetBulletHitTypeForSurface(iSurfaceType);
 
             // ВАЖНО: не создавать новый CCastRay! используем уже откастанный crRay
-            //SpawnHitTypeEffect(this, bhtType, FALSE, vNormal, crRay.cr_vHit, vHitDirection, FLOAT3D(0.0f, 0.0f, 0.0f));
+            SpawnHitTypeEffect(this, bhtType, FALSE, vNormal, crRay.cr_vHit, vHitDirection, FLOAT3D(0.0f, 0.0f, 0.0f));
             AnglesToDirectionVector(GetPlacement().pl_OrientationAngle, vHitDirection);
 
-            m_soEffect.Set3DParameters(20.0f, 10.0f, 1.0f, 1.0f+FRnd()*0.2f);
+			CPlayer &pl = (CPlayer&)*m_penPlayer;
 
-            INDEX iHitSound;
-            INDEX rnd = IRnd()%2;
-            switch (rnd) {
-              case 0: iHitSound = SOUND_KNIFE_STONE_1; break;
-              case 1: iHitSound = SOUND_KNIFE_STONE_2; break;
+            switch (IRnd()%2) {
+              case 0: PlaySound(pl.m_soWeapon0, SOUND_KNIFE_STONE_1, SOF_3D|SOF_VOLUMETRIC); break;
+              case 1: PlaySound(pl.m_soWeapon0, SOUND_KNIFE_STONE_2, SOF_3D|SOF_VOLUMETRIC); break;
             }
-            PlaySound(m_soEffect, iHitSound, SOF_3D|SOF_VOLUMETRIC);
           }
           else if(crRay.cr_penHit->GetRenderType()==RT_MODEL)
           {
@@ -4140,12 +4140,7 @@ procedures:
 
     // fire bullet
     FireOneBullet(wpn_fFX[WEAPON_COLT], wpn_fFY[WEAPON_COLT], 500.0f,
-      ((GetSP()->sp_bCooperative) ? 10.0f : 20.0f));
-
-    // shake view
-    ((CPlayer&)*m_penPlayer).m_tmRecoilShakeStart = _pTimer->GetLerpedCurrentTick();
-    ((CPlayer&)*m_penPlayer).m_fRecoilShakeStrength0 = 4.0f;
-    ((CPlayer&)*m_penPlayer).m_fRecoilShakeStrength = 0.0f;
+      ((GetSP()->sp_bCooperative) ? 100.0f : 100.0f));
 
     if(_pNetwork->IsPlayerLocal(m_penPlayer)) {IFeel_PlayEffect("Colt_fire");}
     DoRecoil();
@@ -4214,7 +4209,7 @@ procedures:
   FireDoubleColt() {
     // fire first colt - one bullet less in colt
     GetAnimator()->FireAnimation(BODY_ANIM_COLT_FIRERIGHT, 0);
-    FireOneBullet(wpn_fFX[WEAPON_DOUBLECOLT], wpn_fFY[WEAPON_DOUBLECOLT], 500.0f, 10.0f);
+    FireOneBullet(wpn_fFX[WEAPON_DOUBLECOLT], wpn_fFY[WEAPON_DOUBLECOLT], 500.0f, 100.0f);
     if(_pNetwork->IsPlayerLocal(m_penPlayer)) {IFeel_PlayEffect("Colt_fire");}
     
     /*
@@ -4257,7 +4252,7 @@ procedures:
     // fire second colt
     GetAnimator()->FireAnimation(BODY_ANIM_COLT_FIRELEFT, 0);
     m_bMirrorFire = TRUE;
-    FireOneBullet(wpn_fFX[WEAPON_DOUBLECOLT], wpn_fFY[WEAPON_DOUBLECOLT], 500.0f, 10.0f);
+    FireOneBullet(wpn_fFX[WEAPON_DOUBLECOLT], wpn_fFY[WEAPON_DOUBLECOLT], 500.0f, 100.0f);
     if(_pNetwork->IsPlayerLocal(m_penPlayer)) {IFeel_PlayEffect("Colt_fire");}
 
     /*
