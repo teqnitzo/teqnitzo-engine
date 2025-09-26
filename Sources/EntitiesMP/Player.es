@@ -1156,7 +1156,7 @@ properties:
  168 FLOAT m_tmSeriousDamageMax   = 40.0f,
  169 FLOAT m_tmSeriousSpeedMax    = 20.0f,
  170 FLOAT m_tmRecoilShakeStart = 0.0f, // used to determine when to stop shaking due to recoil
- 172 FLOAT m_fRecoilShakeStrength0 = 0.0f, // used to determine when to stop shaking due to recoil
+ 171 FLOAT m_fRecoilShakeStrength0 = 0.0f, // used to determine when to stop shaking due to recoil
  172 FLOAT m_fRecoilShakeStrength = 0.0f, // used to determine when to stop shaking due to recoil
 
  180 FLOAT m_tmChainShakeEnd = 0.0f, // used to determine when to stop shaking due to chainsaw damage
