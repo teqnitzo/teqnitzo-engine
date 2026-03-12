@@ -1,18 +1,25 @@
 package com.teqnitzo.engine;
 
 import com.teqnitzo.engine.input.Input;
+import com.teqnitzo.engine.render.Mesh;
 import com.teqnitzo.engine.render.Renderer;
+import com.teqnitzo.engine.render.Shader;
+import com.teqnitzo.engine.render.Texture;
+import com.teqnitzo.engine.scene.GameObject;
+import com.teqnitzo.engine.scene.Scene;
 import org.lwjgl.glfw.GLFW;
 
 public class Engine {
 
     private final Window window;
     private final Renderer renderer;
+    private final Scene scene;
     private boolean running;
 
     public Engine(String title, int width, int height) {
         this.window = new Window(title, width, height);
         this.renderer = new Renderer();
+        this.scene = new Scene();
         this.running = false;
     }
 
@@ -25,7 +32,111 @@ public class Engine {
     private void init() {
         window.init();
         renderer.init();
+        createScene();
         running = true;
+    }
+
+    private void createScene() {
+        float[] vertices = {
+                // front
+                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f, 0f, 0f, 1f,
+                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, 1f,
+                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 0f, 0f, 0f, 1f,
+                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f, 0f, 0f, 1f,
+
+                // back
+                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 1f, 0f, 0f, -1f,
+                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 1f, 0f, 0f, -1f,
+                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, -1f,
+                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f, 0f, 0f, -1f,
+
+                // left
+                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 1f, -1f, 0f, 0f,
+                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f, -1f, 0f, 0f,
+                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 0f, -1f, 0f, 0f,
+                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f, -1f, 0f, 0f,
+
+                // right
+                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 1f, 1f, 0f, 0f,
+                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f, 1f, 0f, 0f,
+                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 0f, 1f, 0f, 0f,
+                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f, 1f, 0f, 0f,
+
+                // top
+                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f, 0f, 1f, 0f,
+                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f, 0f, 1f, 0f,
+                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f, 0f, 1f, 0f,
+                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f, 0f, 1f, 0f,
+
+                // bottom
+                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f, 0f, -1f, 0f,
+                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f, 0f, -1f, 0f,
+                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f, 0f, -1f, 0f,
+                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f, 0f, -1f, 0f
+        };
+
+        int[] indices = {
+                0, 1, 2, 2, 3, 0,
+                4, 5, 6, 6, 7, 4,
+                8, 9, 10, 10, 11, 8,
+                12, 13, 14, 14, 15, 12,
+                16, 17, 18, 18, 19, 16,
+                20, 21, 22, 22, 23, 20
+        };
+
+        String vertexShader = """
+                #version 330 core
+                layout (location = 0) in vec3 aPos;
+                layout (location = 1) in vec3 aColor;
+                layout (location = 2) in vec2 aTexCoord;
+                layout (location = 3) in vec3 aNormal;
+
+                out vec3 vColor;
+                out vec2 vTexCoord;
+                out vec3 vNormal;
+
+                uniform mat4 uMVP;
+
+                void main() {
+                    vColor = aColor;
+                    vTexCoord = aTexCoord;
+                    vNormal = aNormal;
+                    gl_Position = uMVP * vec4(aPos, 1.0);
+                }
+                """;
+
+        String fragmentShader = """
+                #version 330 core
+                in vec3 vColor;
+                in vec2 vTexCoord;
+                in vec3 vNormal;
+
+                out vec4 FragColor;
+
+                uniform sampler2D uTexture;
+                uniform vec3 uLightDir;
+
+                void main() {
+                    vec3 normal = normalize(vNormal);
+                    vec3 lightDir = normalize(-uLightDir);
+
+                    float diffuse = max(dot(normal, lightDir), 0.2);
+
+                    vec4 texColor = texture(uTexture, vTexCoord);
+                    FragColor = texColor * vec4(vColor, 1.0) * diffuse;
+                }
+                """;
+
+        Mesh mesh = new Mesh(vertices, indices);
+        Shader shader = new Shader(vertexShader, fragmentShader);
+        Texture texture = new Texture("/textures/crate.png");
+
+        GameObject cube = new GameObject(mesh, shader, texture);
+        scene.addGameObject(cube);
+
+        GameObject cube2 = new GameObject(mesh, shader, texture);
+        cube2.getTransform().position.set(2.0f, 0.0f, 0.0f);
+        scene.addGameObject(cube2);
     }
 
     private void loop() {
@@ -88,13 +199,16 @@ public class Engine {
         renderer.getCamera().addYaw(Input.getDeltaX() * mouseSensitivity);
         renderer.getCamera().addPitch(Input.getDeltaY() * mouseSensitivity);
 
-        renderer.update(deltaTime);
+        for (GameObject gameObject : scene.getGameObjects()) {
+            gameObject.getTransform().rotation.y += deltaTime;
+            gameObject.getTransform().rotation.x += deltaTime * 0.5f;
+        }
 
         Input.endFrame();
     }
 
     private void render() {
-        renderer.render();
+        renderer.render(scene);
     }
 
     private void shutdown() {
