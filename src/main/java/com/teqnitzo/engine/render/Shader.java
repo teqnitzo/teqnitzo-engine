@@ -2,9 +2,12 @@ package com.teqnitzo.engine.render;
 
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL20;
-
-import java.nio.FloatBuffer;
 import org.lwjgl.system.MemoryStack;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.FloatBuffer;
+import java.nio.charset.StandardCharsets;
 
 public class Shader {
 
@@ -39,6 +42,25 @@ public class Shader {
 
         GL20.glDeleteShader(vertexShader);
         GL20.glDeleteShader(fragmentShader);
+    }
+
+    public static Shader fromResources(String vertexPath, String fragmentPath) {
+        String vertexSrc = loadResourceAsString(vertexPath);
+        String fragmentSrc = loadResourceAsString(fragmentPath);
+        return new Shader(vertexSrc, fragmentSrc);
+    }
+
+    private static String loadResourceAsString(String resourcePath) {
+        try (InputStream inputStream = Shader.class.getResourceAsStream(resourcePath)) {
+            if (inputStream == null) {
+                throw new RuntimeException("Shader resource not found: " + resourcePath);
+            }
+
+            byte[] bytes = inputStream.readAllBytes();
+            return new String(bytes, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read shader resource: " + resourcePath, e);
+        }
     }
 
     public void bind() {

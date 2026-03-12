@@ -84,51 +84,8 @@ public class Engine {
                 20, 21, 22, 22, 23, 20
         };
 
-        String vertexShader = """
-                #version 330 core
-                layout (location = 0) in vec3 aPos;
-                layout (location = 1) in vec3 aColor;
-                layout (location = 2) in vec2 aTexCoord;
-                layout (location = 3) in vec3 aNormal;
-
-                out vec3 vColor;
-                out vec2 vTexCoord;
-                out vec3 vNormal;
-
-                uniform mat4 uMVP;
-
-                void main() {
-                    vColor = aColor;
-                    vTexCoord = aTexCoord;
-                    vNormal = aNormal;
-                    gl_Position = uMVP * vec4(aPos, 1.0);
-                }
-                """;
-
-        String fragmentShader = """
-                #version 330 core
-                in vec3 vColor;
-                in vec2 vTexCoord;
-                in vec3 vNormal;
-
-                out vec4 FragColor;
-
-                uniform sampler2D uTexture;
-                uniform vec3 uLightDir;
-
-                void main() {
-                    vec3 normal = normalize(vNormal);
-                    vec3 lightDir = normalize(-uLightDir);
-
-                    float diffuse = max(dot(normal, lightDir), 0.2);
-
-                    vec4 texColor = texture(uTexture, vTexCoord);
-                    FragColor = texColor * vec4(vColor, 1.0) * diffuse;
-                }
-                """;
-
         Mesh mesh = new Mesh(vertices, indices);
-        Shader shader = new Shader(vertexShader, fragmentShader);
+        Shader shader = Shader.fromResources("/shaders/basic.vert", "/shaders/basic.frag");
         Texture texture = new Texture("/textures/crate.png");
 
         GameObject cube = new GameObject(mesh, shader, texture);
