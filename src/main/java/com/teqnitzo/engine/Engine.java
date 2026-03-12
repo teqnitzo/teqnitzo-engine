@@ -35,8 +35,8 @@ public class Engine {
 
     private void createScene() {
         Mesh mesh = MeshFactory.createTexturedLitCube();
-        Shader shader = Shader.fromResources("/shaders/basic.vert", "/shaders/basic.frag");
-        Texture texture = new Texture("/textures/crate.png");
+        Shader shader = ResourceManager.getShader("basic", "/shaders/basic.vert", "/shaders/basic.frag");
+        Texture texture = ResourceManager.getTexture("crate", "/textures/crate.png");
         Material material = new Material(shader, texture);
 
         GameObject cube = new GameObject(mesh, material);
@@ -120,6 +120,7 @@ public class Engine {
     }
 
     private void shutdown() {
+        ResourceManager.clear();
         window.destroy();
     }
 }
