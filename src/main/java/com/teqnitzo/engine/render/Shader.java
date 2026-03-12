@@ -61,4 +61,13 @@ public class Shader {
             GL20.glUniformMatrix4fv(location, false, buffer);
         }
     }
+
+    public void setUniform(String name, int value) {
+        int location = GL20.glGetUniformLocation(programId, name);
+        if (location < 0) {
+            throw new IllegalStateException("Uniform not found: " + name);
+        }
+
+        GL20.glUniform1i(location, value);
+    }
 }

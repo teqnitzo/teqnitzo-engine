@@ -10,72 +10,56 @@ public class Renderer {
     private Shader shader;
     private Transform transform;
     private Camera camera;
+    private Texture texture;
 
     public void init() {
         GL11.glEnable(GL11.GL_DEPTH_TEST);
 
         float[] vertices = {
-                // front - red
-                -0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
-                -0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
-                0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
-                0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
+                // front
+                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f,
+                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 0f,
+                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 0f,
+                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f,
 
-                // back - green
-                -0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-                0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-                0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-                -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+                // back
+                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 1f,
+                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 1f,
+                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f,
+                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f,
 
-                // left - blue
-                -0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f,
-                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f,
-                -0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
-                -0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+                // left
+                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 1f,
+                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f,
+                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 0f,
+                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f,
 
-                // right - yellow
-                0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 0.0f,
-                0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 0.0f,
-                0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 0.0f,
-                0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 0.0f,
+                // right
+                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 1f,
+                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f,
+                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 0f,
+                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f,
 
-                // top - magenta
-                -0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 1.0f,
-                -0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 1.0f,
-                0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 1.0f,
-                0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 1.0f,
+                // top
+                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f,
+                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f,
+                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f,
+                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f,
 
-                // bottom - cyan
-                -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f,
-                0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f,
-                0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-                -0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 1.0f
+                // bottom
+                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f,
+                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f,
+                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f,
+                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f
         };
 
         int[] indices = {
-                // front
-                0, 1, 2,
-                2, 3, 0,
-
-                // back
-                4, 5, 6,
-                6, 7, 4,
-
-                // left
-                8, 9, 10,
-                10, 11, 8,
-
-                // right
-                12, 13, 14,
-                14, 15, 12,
-
-                // top
-                16, 17, 18,
-                18, 19, 16,
-
-                // bottom
-                20, 21, 22,
-                22, 23, 20
+                0, 1, 2, 2, 3, 0,
+                4, 5, 6, 6, 7, 4,
+                8, 9, 10, 10, 11, 8,
+                12, 13, 14, 14, 15, 12,
+                16, 17, 18, 18, 19, 16,
+                20, 21, 22, 22, 23, 20
         };
 
         triangle = new Mesh(vertices, indices);
@@ -86,13 +70,16 @@ public class Renderer {
                 #version 330 core
                 layout (location = 0) in vec3 aPos;
                 layout (location = 1) in vec3 aColor;
-                
+                layout (location = 2) in vec2 aTexCoord;
+        
                 out vec3 vColor;
-                
+                out vec2 vTexCoord;
+        
                 uniform mat4 uMVP;
-                
+        
                 void main() {
                     vColor = aColor;
+                    vTexCoord = aTexCoord;
                     gl_Position = uMVP * vec4(aPos, 1.0);
                 }
                 """;
@@ -100,15 +87,20 @@ public class Renderer {
         String fragmentShader = """
                 #version 330 core
                 in vec3 vColor;
-                
+                in vec2 vTexCoord;
+        
                 out vec4 FragColor;
-                
+        
+                uniform sampler2D uTexture;
+        
                 void main() {
-                    FragColor = vec4(vColor, 1.0);
+                    vec4 texColor = texture(uTexture, vTexCoord);
+                    FragColor = texColor * vec4(vColor, 1.0);
                 }
                 """;
 
         shader = new Shader(vertexShader, fragmentShader);
+        texture = new Texture("/textures/crate.png");
     }
 
     public void update(float deltaTime) {
@@ -129,6 +121,8 @@ public class Renderer {
 
         shader.bind();
         shader.setUniform("uMVP", mvp);
+        texture.bind(0);
+        shader.setUniform("uTexture", 0);
         triangle.render();
         shader.unbind();
     }
