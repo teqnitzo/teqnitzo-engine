@@ -12,10 +12,62 @@ public class Renderer {
     private Camera camera;
 
     public void init() {
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+
         float[] vertices = {
-                0.0f,  0.5f, 0.0f,
-                -0.5f, -0.5f, 0.0f,
-                0.5f, -0.5f, 0.0f
+                // front
+                -0.5f,  0.5f,  0.5f,
+                -0.5f, -0.5f,  0.5f,
+                0.5f, -0.5f,  0.5f,
+
+                0.5f, -0.5f,  0.5f,
+                0.5f,  0.5f,  0.5f,
+                -0.5f,  0.5f,  0.5f,
+
+                // back
+                -0.5f,  0.5f, -0.5f,
+                0.5f,  0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f,
+
+                0.5f, -0.5f, -0.5f,
+                -0.5f, -0.5f, -0.5f,
+                -0.5f,  0.5f, -0.5f,
+
+                // left
+                -0.5f,  0.5f, -0.5f,
+                -0.5f, -0.5f, -0.5f,
+                -0.5f, -0.5f,  0.5f,
+
+                -0.5f, -0.5f,  0.5f,
+                -0.5f,  0.5f,  0.5f,
+                -0.5f,  0.5f, -0.5f,
+
+                // right
+                0.5f,  0.5f, -0.5f,
+                0.5f,  0.5f,  0.5f,
+                0.5f, -0.5f,  0.5f,
+
+                0.5f, -0.5f,  0.5f,
+                0.5f, -0.5f, -0.5f,
+                0.5f,  0.5f, -0.5f,
+
+                // top
+                -0.5f,  0.5f, -0.5f,
+                -0.5f,  0.5f,  0.5f,
+                0.5f,  0.5f,  0.5f,
+
+                0.5f,  0.5f,  0.5f,
+                0.5f,  0.5f, -0.5f,
+                -0.5f,  0.5f, -0.5f,
+
+                // bottom
+                -0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f,  0.5f,
+
+                0.5f, -0.5f,  0.5f,
+                -0.5f, -0.5f,  0.5f,
+                -0.5f, -0.5f, -0.5f
         };
 
         triangle = new Mesh(vertices);
@@ -47,6 +99,7 @@ public class Renderer {
 
     public void update(float deltaTime) {
         transform.rotation.y += deltaTime;
+        transform.rotation.x += deltaTime * 0.5f;
     }
 
     public void render() {
