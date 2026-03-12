@@ -45,6 +45,10 @@ public class Renderer {
         shader = new Shader(vertexShader, fragmentShader);
     }
 
+    public void update(float deltaTime) {
+        transform.rotation.y += deltaTime;
+    }
+
     public void render() {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 

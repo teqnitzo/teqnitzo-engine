@@ -66,7 +66,7 @@ public class Engine {
     }
 
     private void update(float deltaTime) {
-        // game logic here
+        renderer.update(deltaTime);
     }
 
     private void render() {
