@@ -66,6 +66,24 @@ public class Engine {
     }
 
     private void update(float deltaTime) {
+        float cameraSpeed = 2.0f * deltaTime;
+
+        if (Input.isKeyDown(GLFW.GLFW_KEY_W)) {
+            renderer.getCamera().moveForward(cameraSpeed);
+        }
+
+        if (Input.isKeyDown(GLFW.GLFW_KEY_S)) {
+            renderer.getCamera().moveBackward(cameraSpeed);
+        }
+
+        if (Input.isKeyDown(GLFW.GLFW_KEY_A)) {
+            renderer.getCamera().moveLeft(cameraSpeed);
+        }
+
+        if (Input.isKeyDown(GLFW.GLFW_KEY_D)) {
+            renderer.getCamera().moveRight(cameraSpeed);
+        }
+
         renderer.update(deltaTime);
     }
 

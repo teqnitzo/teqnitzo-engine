@@ -65,4 +65,8 @@ public class Renderer {
         triangle.render();
         shader.unbind();
     }
+
+    public Camera getCamera() {
+        return camera;
+    }
 }

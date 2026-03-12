@@ -35,6 +35,22 @@ public class Camera {
                 .translate(-position.x, -position.y, -position.z);
     }
 
+    public void moveForward(float amount) {
+        position.z -= amount;
+    }
+
+    public void moveBackward(float amount) {
+        position.z += amount;
+    }
+
+    public void moveLeft(float amount) {
+        position.x -= amount;
+    }
+
+    public void moveRight(float amount) {
+        position.x += amount;
+    }
+
     public Vector3f getPosition() {
         return position;
     }
