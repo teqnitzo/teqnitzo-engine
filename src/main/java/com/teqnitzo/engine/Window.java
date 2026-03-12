@@ -52,7 +52,6 @@ public class Window {
         GL.createCapabilities();
 
         GL11.glViewport(0, 0, width, height);
-        GL11.glClearColor(0.1f, 0.1f, 0.12f, 1.0f);
     }
 
     public boolean shouldClose() {

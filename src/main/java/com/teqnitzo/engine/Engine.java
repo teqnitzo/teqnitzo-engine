@@ -1,16 +1,18 @@
 package com.teqnitzo.engine;
 
 import com.teqnitzo.engine.input.Input;
+import com.teqnitzo.engine.render.Renderer;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
 
 public class Engine {
 
     private final Window window;
+    private final Renderer renderer;
     private boolean running;
 
     public Engine(String title, int width, int height) {
         this.window = new Window(title, width, height);
+        this.renderer = new Renderer();
         this.running = false;
     }
 
@@ -22,6 +24,7 @@ public class Engine {
 
     private void init() {
         window.init();
+        renderer.init();
         running = true;
     }
 
@@ -57,11 +60,9 @@ public class Engine {
     }
 
     private void input() {
-
         if (Input.isKeyDown(GLFW.GLFW_KEY_ESCAPE)) {
             running = false;
         }
-
     }
 
     private void update(float deltaTime) {
@@ -69,7 +70,7 @@ public class Engine {
     }
 
     private void render() {
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+        renderer.render();
     }
 
     private void shutdown() {
