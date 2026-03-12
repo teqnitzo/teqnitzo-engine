@@ -1,10 +1,7 @@
 package com.teqnitzo.engine;
 
 import com.teqnitzo.engine.input.Input;
-import com.teqnitzo.engine.render.Mesh;
-import com.teqnitzo.engine.render.Renderer;
-import com.teqnitzo.engine.render.Shader;
-import com.teqnitzo.engine.render.Texture;
+import com.teqnitzo.engine.render.*;
 import com.teqnitzo.engine.scene.GameObject;
 import com.teqnitzo.engine.scene.Scene;
 import org.lwjgl.glfw.GLFW;
@@ -87,11 +84,12 @@ public class Engine {
         Mesh mesh = new Mesh(vertices, indices);
         Shader shader = Shader.fromResources("/shaders/basic.vert", "/shaders/basic.frag");
         Texture texture = new Texture("/textures/crate.png");
+        Material material = new Material(shader, texture);
 
-        GameObject cube = new GameObject(mesh, shader, texture);
+        GameObject cube = new GameObject(mesh, material);
         scene.addGameObject(cube);
 
-        GameObject cube2 = new GameObject(mesh, shader, texture);
+        GameObject cube2 = new GameObject(mesh, material);
         cube2.getTransform().position.set(2.0f, 0.0f, 0.0f);
         scene.addGameObject(cube2);
     }

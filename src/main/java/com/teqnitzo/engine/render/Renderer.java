@@ -30,18 +30,17 @@ public class Renderer {
                     .mul(view)
                     .mul(model);
 
-            Shader shader = gameObject.getShader();
-            shader.bind();
+            Material material = gameObject.getMaterial();
+            Shader shader = material.getShader();
+
+            material.bind();
+
             shader.setUniform("uMVP", mvp);
             shader.setUniform("uLightDir", -0.5f, -1.0f, -0.3f);
 
-            Texture texture = gameObject.getTexture();
-            texture.bind(0);
-            shader.setUniform("uTexture", 0);
-
             gameObject.getMesh().render();
 
-            shader.unbind();
+            material.unbind();
         }
     }
 
