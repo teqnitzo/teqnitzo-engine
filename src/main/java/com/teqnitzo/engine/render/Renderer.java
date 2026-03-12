@@ -17,6 +17,15 @@ public class Renderer {
         GL11.glEnable(GL11.GL_DEPTH_TEST);
     }
 
+    public void resize(int width, int height) {
+        if (height == 0) {
+            height = 1;
+        }
+
+        GL11.glViewport(0, 0, width, height);
+        camera.setAspectRatio((float) width / (float) height);
+    }
+
     public void render(Scene scene) {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 

@@ -29,6 +29,7 @@ public class Engine {
     private void init() {
         window.init();
         renderer.init();
+        renderer.resize(window.getWidth(), window.getHeight());
         createScene();
         running = true;
     }
@@ -54,6 +55,11 @@ public class Engine {
         double accumulator = 0.0;
 
         while (running && !window.shouldClose()) {
+            if (window.isResized()) {
+                renderer.resize(window.getWidth(), window.getHeight());
+                window.setResized(false);
+            }
+
             double currentTime = GLFW.glfwGetTime();
             double frameTime = currentTime - previousTime;
             previousTime = currentTime;

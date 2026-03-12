@@ -11,7 +11,7 @@ public class Camera {
     private float yaw;
 
     private final float fov;
-    private final float aspectRatio;
+    private float aspectRatio;
     private final float nearPlane;
     private final float farPlane;
 
@@ -81,6 +81,10 @@ public class Camera {
         if (pitch < -limit) {
             pitch = -limit;
         }
+    }
+
+    public void setAspectRatio(float aspectRatio) {
+        this.aspectRatio = aspectRatio;
     }
 
     public Vector3f getPosition() {

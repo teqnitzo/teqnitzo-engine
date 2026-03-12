@@ -4,20 +4,21 @@ import com.teqnitzo.engine.input.Input;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 
 public class Window {
 
     private final String title;
-    private final int width;
-    private final int height;
+    private int width;
+    private int height;
 
     private long handle;
+    private boolean resized;
 
     public Window(String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
+        this.resized = false;
     }
 
     public void init() {
@@ -49,6 +50,12 @@ public class Window {
             Input.setMousePosition(xpos, ypos);
         });
 
+        GLFW.glfwSetFramebufferSizeCallback(handle, (window, newWidth, newHeight) -> {
+            this.width = newWidth;
+            this.height = newHeight;
+            this.resized = true;
+        });
+
         GLFW.glfwSetInputMode(handle, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_DISABLED);
 
         GLFW.glfwMakeContextCurrent(handle);
@@ -56,8 +63,6 @@ public class Window {
         GLFW.glfwShowWindow(handle);
 
         GL.createCapabilities();
-
-        GL11.glViewport(0, 0, width, height);
     }
 
     public boolean shouldClose() {
@@ -84,5 +89,21 @@ public class Window {
 
     public long getHandle() {
         return handle;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public boolean isResized() {
+        return resized;
+    }
+
+    public void setResized(boolean resized) {
+        this.resized = resized;
     }
 }
