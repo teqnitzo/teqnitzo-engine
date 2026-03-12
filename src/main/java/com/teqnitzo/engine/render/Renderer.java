@@ -17,40 +17,40 @@ public class Renderer {
 
         float[] vertices = {
                 // front
-                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f,
-                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 0f,
-                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 0f,
-                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f,
+                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f, 0f, 0f, 1f,
+                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, 1f,
+                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 0f, 0f, 0f, 1f,
+                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f, 0f, 0f, 1f,
 
                 // back
-                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 1f,
-                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 1f,
-                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f,
-                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f,
+                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 1f, 0f, 0f, -1f,
+                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 1f, 0f, 0f, -1f,
+                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f, 0f, 0f, -1f,
+                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f, 0f, 0f, -1f,
 
                 // left
-                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 1f,
-                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f,
-                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 0f,
-                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f,
+                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 1f, -1f, 0f, 0f,
+                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f, -1f, 0f, 0f,
+                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 0f, -1f, 0f, 0f,
+                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f, -1f, 0f, 0f,
 
                 // right
-                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 1f,
-                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f,
-                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 0f,
-                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f,
+                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 1f, 1f, 0f, 0f,
+                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f, 1f, 0f, 0f,
+                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 0f, 1f, 0f, 0f,
+                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f, 1f, 0f, 0f,
 
                 // top
-                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f,
-                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f,
-                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f,
-                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f,
+                -0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f, 0f, 1f, 0f,
+                -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f, 0f, 1f, 0f,
+                0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f, 0f, 1f, 0f,
+                0.5f,  0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f, 0f, 1f, 0f,
 
                 // bottom
-                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f,
-                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f,
-                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f,
-                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f
+                -0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 1f, 0f, 0f, -1f, 0f,
+                0.5f, -0.5f, -0.5f, 1f, 1f, 1f, 0f, 0f, 0f, -1f, 0f,
+                0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f, 0f, -1f, 0f,
+                -0.5f, -0.5f,  0.5f, 1f, 1f, 1f, 1f, 1f, 0f, -1f, 0f
         };
 
         int[] indices = {
@@ -71,15 +71,18 @@ public class Renderer {
                 layout (location = 0) in vec3 aPos;
                 layout (location = 1) in vec3 aColor;
                 layout (location = 2) in vec2 aTexCoord;
+                layout (location = 3) in vec3 aNormal;
         
                 out vec3 vColor;
                 out vec2 vTexCoord;
+                out vec3 vNormal;
         
                 uniform mat4 uMVP;
         
                 void main() {
                     vColor = aColor;
                     vTexCoord = aTexCoord;
+                    vNormal = aNormal;
                     gl_Position = uMVP * vec4(aPos, 1.0);
                 }
                 """;
@@ -88,14 +91,21 @@ public class Renderer {
                 #version 330 core
                 in vec3 vColor;
                 in vec2 vTexCoord;
+                in vec3 vNormal;
         
                 out vec4 FragColor;
         
                 uniform sampler2D uTexture;
+                uniform vec3 uLightDir;
         
                 void main() {
+                    vec3 normal = normalize(vNormal);
+                    vec3 lightDir = normalize(-uLightDir);
+        
+                    float diffuse = max(dot(normal, lightDir), 0.2);
+        
                     vec4 texColor = texture(uTexture, vTexCoord);
-                    FragColor = texColor * vec4(vColor, 1.0);
+                    FragColor = texColor * vec4(vColor, 1.0) * diffuse;
                 }
                 """;
 
@@ -123,6 +133,7 @@ public class Renderer {
         shader.setUniform("uMVP", mvp);
         texture.bind(0);
         shader.setUniform("uTexture", 0);
+        shader.setUniform("uLightDir", -0.5f, -1.0f, -0.3f);
         triangle.render();
         shader.unbind();
     }

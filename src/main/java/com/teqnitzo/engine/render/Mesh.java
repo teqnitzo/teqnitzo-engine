@@ -35,7 +35,7 @@ public class Mesh {
         indexBuffer.put(indices).flip();
         GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indexBuffer, GL15.GL_STATIC_DRAW);
 
-        int stride = 8 * Float.BYTES;
+        int stride = 11 * Float.BYTES;
 
         GL20.glVertexAttribPointer(0, 3, GL30.GL_FLOAT, false, stride, 0);
         GL20.glEnableVertexAttribArray(0);
@@ -45,6 +45,9 @@ public class Mesh {
 
         GL20.glVertexAttribPointer(2, 2, GL30.GL_FLOAT, false, stride, 6L * Float.BYTES);
         GL20.glEnableVertexAttribArray(2);
+
+        GL20.glVertexAttribPointer(3, 3, GL30.GL_FLOAT, false, stride, 8L * Float.BYTES);
+        GL20.glEnableVertexAttribArray(3);
 
         MemoryUtil.memFree(vertexBuffer);
         MemoryUtil.memFree(indexBuffer);
