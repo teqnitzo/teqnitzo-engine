@@ -67,10 +67,6 @@ public class Window {
         GLFW.glfwSwapBuffers(handle);
     }
 
-    public boolean isKeyPressed(int keyCode) {
-        return GLFW.glfwGetKey(handle, keyCode) == GLFW.GLFW_PRESS;
-    }
-
     public void destroy() {
         GLFW.glfwDestroyWindow(handle);
         GLFW.glfwTerminate();
