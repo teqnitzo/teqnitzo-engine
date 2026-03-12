@@ -85,8 +85,8 @@ public class Engine {
             renderer.getCamera().moveRight(cameraSpeed);
         }
 
-        renderer.getCamera().addYaw(-Input.getDeltaX() * mouseSensitivity);
-        renderer.getCamera().addPitch(-Input.getDeltaY() * mouseSensitivity);
+        renderer.getCamera().addYaw(Input.getDeltaX() * mouseSensitivity);
+        renderer.getCamera().addPitch(Input.getDeltaY() * mouseSensitivity);
 
         renderer.update(deltaTime);
 

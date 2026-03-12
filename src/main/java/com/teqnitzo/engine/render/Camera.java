@@ -38,20 +38,33 @@ public class Camera {
                 .translate(-position.x, -position.y, -position.z);
     }
 
+    public Vector3f getForwardVector() {
+        return new Vector3f(
+                (float) Math.sin(yaw),
+                0.0f,
+                (float) -Math.cos(yaw)
+        ).normalize();
+    }
+
+    public Vector3f getRightVector() {
+        Vector3f forward = getForwardVector();
+        return new Vector3f(-forward.z, 0.0f, forward.x).normalize();
+    }
+
     public void moveForward(float amount) {
-        position.z -= amount;
+        position.add(getForwardVector().mul(amount));
     }
 
     public void moveBackward(float amount) {
-        position.z += amount;
+        position.sub(getForwardVector().mul(amount));
     }
 
     public void moveLeft(float amount) {
-        position.x -= amount;
+        position.sub(getRightVector().mul(amount));
     }
 
     public void moveRight(float amount) {
-        position.x += amount;
+        position.add(getRightVector().mul(amount));
     }
 
     public void addYaw(float amount) {
