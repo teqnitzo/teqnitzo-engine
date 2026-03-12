@@ -1,5 +1,6 @@
 package com.teqnitzo.engine;
 
+import com.teqnitzo.engine.input.Input;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
@@ -56,9 +57,11 @@ public class Engine {
     }
 
     private void input() {
-        if (window.isKeyPressed(GLFW.GLFW_KEY_ESCAPE)) {
+
+        if (Input.isKeyDown(GLFW.GLFW_KEY_ESCAPE)) {
             running = false;
         }
+
     }
 
     private void update(float deltaTime) {

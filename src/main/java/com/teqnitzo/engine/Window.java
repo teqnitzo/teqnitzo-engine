@@ -1,5 +1,6 @@
 package com.teqnitzo.engine;
 
+import com.teqnitzo.engine.input.Input;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
@@ -35,6 +36,14 @@ public class Window {
             GLFW.glfwTerminate();
             throw new IllegalStateException("Failed to create GLFW window");
         }
+
+        GLFW.glfwSetKeyCallback(handle, (window, key, scancode, action, mods) -> {
+            if (action == GLFW.GLFW_PRESS) {
+                Input.setKey(key, true);
+            } else if (action == GLFW.GLFW_RELEASE) {
+                Input.setKey(key, false);
+            }
+        });
 
         GLFW.glfwMakeContextCurrent(handle);
         GLFW.glfwSwapInterval(1);
