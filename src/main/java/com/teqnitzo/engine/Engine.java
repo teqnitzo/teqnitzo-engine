@@ -25,8 +25,29 @@ public class Engine {
     }
 
     private void loop() {
+        final double fixedTimeStep = 1.0 / 60.0;
+
+        double previousTime = GLFW.glfwGetTime();
+        double accumulator = 0.0;
+
         while (running && !window.shouldClose()) {
-            update();
+            double currentTime = GLFW.glfwGetTime();
+            double frameTime = currentTime - previousTime;
+            previousTime = currentTime;
+
+            if (frameTime > 0.25) {
+                frameTime = 0.25;
+            }
+
+            accumulator += frameTime;
+
+            input();
+
+            while (accumulator >= fixedTimeStep) {
+                update((float) fixedTimeStep);
+                accumulator -= fixedTimeStep;
+            }
+
             render();
 
             window.swapBuffers();
@@ -34,10 +55,14 @@ public class Engine {
         }
     }
 
-    private void update() {
+    private void input() {
         if (window.isKeyPressed(GLFW.GLFW_KEY_ESCAPE)) {
             running = false;
         }
+    }
+
+    private void update(float deltaTime) {
+        // game logic here
     }
 
     private void render() {
