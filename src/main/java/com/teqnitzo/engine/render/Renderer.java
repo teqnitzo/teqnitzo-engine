@@ -1,14 +1,17 @@
 package com.teqnitzo.engine.render;
 
+import com.teqnitzo.engine.math.Transform;
+import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 
 public class Renderer {
 
     private Mesh triangle;
     private Shader shader;
+    private Transform transform;
+    private Camera camera;
 
     public void init() {
-
         float[] vertices = {
                 0.0f,  0.5f, 0.0f,
                 -0.5f, -0.5f, 0.0f,
@@ -16,13 +19,17 @@ public class Renderer {
         };
 
         triangle = new Mesh(vertices);
+        transform = new Transform();
+        camera = new Camera((float) Math.toRadians(60.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
 
         String vertexShader = """
                 #version 330 core
                 layout (location = 0) in vec3 aPos;
 
+                uniform mat4 uMVP;
+
                 void main() {
-                    gl_Position = vec4(aPos, 1.0);
+                    gl_Position = uMVP * vec4(aPos, 1.0);
                 }
                 """;
 
@@ -39,11 +46,19 @@ public class Renderer {
     }
 
     public void render() {
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+
+        Matrix4f model = transform.getModelMatrix();
+        Matrix4f view = camera.getViewMatrix();
+        Matrix4f projection = camera.getProjectionMatrix();
+
+        Matrix4f mvp = new Matrix4f(projection)
+                .mul(view)
+                .mul(model);
+
         shader.bind();
-
+        shader.setUniform("uMVP", mvp);
         triangle.render();
-
         shader.unbind();
     }
 }
