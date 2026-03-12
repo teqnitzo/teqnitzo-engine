@@ -67,6 +67,7 @@ public class Engine {
 
     private void update(float deltaTime) {
         float cameraSpeed = 2.0f * deltaTime;
+        float mouseSensitivity = 0.002f;
 
         if (Input.isKeyDown(GLFW.GLFW_KEY_W)) {
             renderer.getCamera().moveForward(cameraSpeed);
@@ -84,7 +85,12 @@ public class Engine {
             renderer.getCamera().moveRight(cameraSpeed);
         }
 
+        renderer.getCamera().addYaw(-Input.getDeltaX() * mouseSensitivity);
+        renderer.getCamera().addPitch(-Input.getDeltaY() * mouseSensitivity);
+
         renderer.update(deltaTime);
+
+        Input.endFrame();
     }
 
     private void render() {

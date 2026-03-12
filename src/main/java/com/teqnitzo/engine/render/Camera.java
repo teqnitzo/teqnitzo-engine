@@ -6,7 +6,9 @@ import org.joml.Vector3f;
 public class Camera {
 
     private final Vector3f position;
-    private final Vector3f rotation;
+
+    private float pitch;
+    private float yaw;
 
     private final float fov;
     private final float aspectRatio;
@@ -15,7 +17,9 @@ public class Camera {
 
     public Camera(float fov, float aspectRatio, float nearPlane, float farPlane) {
         this.position = new Vector3f(0.0f, 0.0f, 2.0f);
-        this.rotation = new Vector3f(0.0f, 0.0f, 0.0f);
+
+        this.pitch = 0.0f;
+        this.yaw = 0.0f;
 
         this.fov = fov;
         this.aspectRatio = aspectRatio;
@@ -29,9 +33,8 @@ public class Camera {
 
     public Matrix4f getViewMatrix() {
         return new Matrix4f()
-                .rotateX(rotation.x)
-                .rotateY(rotation.y)
-                .rotateZ(rotation.z)
+                .rotateX(pitch)
+                .rotateY(yaw)
                 .translate(-position.x, -position.y, -position.z);
     }
 
@@ -51,11 +54,23 @@ public class Camera {
         position.x += amount;
     }
 
-    public Vector3f getPosition() {
-        return position;
+    public void addYaw(float amount) {
+        yaw += amount;
     }
 
-    public Vector3f getRotation() {
-        return rotation;
+    public void addPitch(float amount) {
+        pitch += amount;
+
+        float limit = (float) Math.toRadians(89.0);
+        if (pitch > limit) {
+            pitch = limit;
+        }
+        if (pitch < -limit) {
+            pitch = -limit;
+        }
+    }
+
+    public Vector3f getPosition() {
+        return position;
     }
 }

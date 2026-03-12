@@ -45,6 +45,12 @@ public class Window {
             }
         });
 
+        GLFW.glfwSetCursorPosCallback(handle, (window, xpos, ypos) -> {
+            Input.setMousePosition(xpos, ypos);
+        });
+
+        GLFW.glfwSetInputMode(handle, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_DISABLED);
+
         GLFW.glfwMakeContextCurrent(handle);
         GLFW.glfwSwapInterval(1);
         GLFW.glfwShowWindow(handle);
