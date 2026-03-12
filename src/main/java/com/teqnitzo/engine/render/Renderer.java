@@ -15,59 +15,59 @@ public class Renderer {
         GL11.glEnable(GL11.GL_DEPTH_TEST);
 
         float[] vertices = {
-                // front
-                -0.5f,  0.5f,  0.5f,
-                -0.5f, -0.5f,  0.5f,
-                0.5f, -0.5f,  0.5f,
+                // front - red
+                -0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
+                -0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
+                0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
 
-                0.5f, -0.5f,  0.5f,
-                0.5f,  0.5f,  0.5f,
-                -0.5f,  0.5f,  0.5f,
+                0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
+                0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
+                -0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f,
 
-                // back
-                -0.5f,  0.5f, -0.5f,
-                0.5f,  0.5f, -0.5f,
-                0.5f, -0.5f, -0.5f,
+                // back - green
+                -0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+                0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+                0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 
-                0.5f, -0.5f, -0.5f,
-                -0.5f, -0.5f, -0.5f,
-                -0.5f,  0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+                -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+                -0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 
-                // left
-                -0.5f,  0.5f, -0.5f,
-                -0.5f, -0.5f, -0.5f,
-                -0.5f, -0.5f,  0.5f,
+                // left - blue
+                -0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f,
+                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f,
+                -0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
 
-                -0.5f, -0.5f,  0.5f,
-                -0.5f,  0.5f,  0.5f,
-                -0.5f,  0.5f, -0.5f,
+                -0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+                -0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+                -0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f,
 
-                // right
-                0.5f,  0.5f, -0.5f,
-                0.5f,  0.5f,  0.5f,
-                0.5f, -0.5f,  0.5f,
+                // right - yellow
+                0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 0.0f,
+                0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 0.0f,
+                0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 0.0f,
 
-                0.5f, -0.5f,  0.5f,
-                0.5f, -0.5f, -0.5f,
-                0.5f,  0.5f, -0.5f,
+                0.5f, -0.5f,  0.5f, 1.0f, 1.0f, 0.0f,
+                0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 0.0f,
+                0.5f,  0.5f, -0.5f, 1.0f, 1.0f, 0.0f,
 
-                // top
-                -0.5f,  0.5f, -0.5f,
-                -0.5f,  0.5f,  0.5f,
-                0.5f,  0.5f,  0.5f,
+                // top - magenta
+                -0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 1.0f,
+                -0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 1.0f,
+                0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 1.0f,
 
-                0.5f,  0.5f,  0.5f,
-                0.5f,  0.5f, -0.5f,
-                -0.5f,  0.5f, -0.5f,
+                0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 1.0f,
+                0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 1.0f,
+                -0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 1.0f,
 
-                // bottom
-                -0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f,  0.5f,
+                // bottom - cyan
+                -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f,
+                0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f,
+                0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
 
-                0.5f, -0.5f,  0.5f,
-                -0.5f, -0.5f,  0.5f,
-                -0.5f, -0.5f, -0.5f
+                0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+                -0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+                -0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f
         };
 
         triangle = new Mesh(vertices);
@@ -77,20 +77,26 @@ public class Renderer {
         String vertexShader = """
                 #version 330 core
                 layout (location = 0) in vec3 aPos;
-
+                layout (location = 1) in vec3 aColor;
+                
+                out vec3 vColor;
+                
                 uniform mat4 uMVP;
-
+                
                 void main() {
+                    vColor = aColor;
                     gl_Position = uMVP * vec4(aPos, 1.0);
                 }
                 """;
 
         String fragmentShader = """
                 #version 330 core
+                in vec3 vColor;
+                
                 out vec4 FragColor;
-
+                
                 void main() {
-                    FragColor = vec4(0.2, 0.7, 1.0, 1.0);
+                    FragColor = vec4(vColor, 1.0);
                 }
                 """;
 

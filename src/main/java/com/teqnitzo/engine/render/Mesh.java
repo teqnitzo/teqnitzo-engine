@@ -1,11 +1,11 @@
 package com.teqnitzo.engine.render;
 
-import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
+import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
-import org.lwjgl.system.MemoryUtil;
 
 public class Mesh {
 
@@ -14,8 +14,7 @@ public class Mesh {
     private final int vertexCount;
 
     public Mesh(float[] vertices) {
-
-        vertexCount = vertices.length / 3;
+        vertexCount = vertices.length / 6;
 
         vao = GL30.glGenVertexArrays();
         GL30.glBindVertexArray(vao);
@@ -28,8 +27,13 @@ public class Mesh {
 
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
 
-        GL20.glVertexAttribPointer(0, 3, GL30.GL_FLOAT, false, 0, 0);
+        int stride = 6 * Float.BYTES;
+
+        GL20.glVertexAttribPointer(0, 3, GL30.GL_FLOAT, false, stride, 0);
         GL20.glEnableVertexAttribArray(0);
+
+        GL20.glVertexAttribPointer(1, 3, GL30.GL_FLOAT, false, stride, 3L * Float.BYTES);
+        GL20.glEnableVertexAttribArray(1);
 
         MemoryUtil.memFree(buffer);
 
