@@ -11,6 +11,12 @@ public class Scene {
         gameObjects.add(gameObject);
     }
 
+    public void update(float deltaTime) {
+        for (GameObject gameObject : gameObjects) {
+            gameObject.update(deltaTime);
+        }
+    }
+
     public List<GameObject> getGameObjects() {
         return gameObjects;
     }

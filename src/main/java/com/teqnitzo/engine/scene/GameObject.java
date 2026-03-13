@@ -16,6 +16,9 @@ public class GameObject {
         this.material = material;
     }
 
+    public void update(float deltaTime) {
+    }
+
     public Transform getTransform() {
         return transform;
     }

@@ -3,6 +3,7 @@ package com.teqnitzo.engine;
 import com.teqnitzo.engine.input.Input;
 import com.teqnitzo.engine.render.*;
 import com.teqnitzo.engine.scene.GameObject;
+import com.teqnitzo.engine.scene.RotatingCube;
 import com.teqnitzo.engine.scene.Scene;
 import org.lwjgl.glfw.GLFW;
 
@@ -40,10 +41,10 @@ public class Engine {
         Texture texture = ResourceManager.getTexture("crate", "/textures/crate.png");
         Material material = new Material(shader, texture);
 
-        GameObject cube = new GameObject(mesh, material);
+        GameObject cube = new RotatingCube(mesh, material);
         scene.addGameObject(cube);
 
-        GameObject cube2 = new GameObject(mesh, material);
+        GameObject cube2 = new RotatingCube(mesh, material);
         cube2.getTransform().position.set(2.0f, 0.0f, 0.0f);
         scene.addGameObject(cube2);
     }
@@ -113,10 +114,7 @@ public class Engine {
         renderer.getCamera().addYaw(Input.getDeltaX() * mouseSensitivity);
         renderer.getCamera().addPitch(Input.getDeltaY() * mouseSensitivity);
 
-        for (GameObject gameObject : scene.getGameObjects()) {
-            gameObject.getTransform().rotation.y += deltaTime;
-            gameObject.getTransform().rotation.x += deltaTime * 0.5f;
-        }
+        scene.update(deltaTime);
 
         Input.endFrame();
     }
