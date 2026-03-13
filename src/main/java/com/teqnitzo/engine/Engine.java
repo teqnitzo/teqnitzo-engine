@@ -43,7 +43,13 @@ public class Engine {
         Texture texture = ResourceManager.getTexture("crate", "/textures/crate.png");
         Material material = new Material(shader, texture);
 
-        scene.setDirectionalLight(new DirectionalLight(new Vector3f(-0.5f, -1.0f, -0.3f)));
+        scene.setDirectionalLight(
+                new DirectionalLight(
+                        new Vector3f(-0.5f, -1.0f, -0.3f),
+                        new Vector3f(1.0f, 1.0f, 1.0f),
+                        0.2f
+                )
+        );
 
         GameObject cube = new RotatingCube(mesh, material);
         scene.addGameObject(cube);

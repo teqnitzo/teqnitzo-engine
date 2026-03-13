@@ -58,6 +58,15 @@ public class Renderer {
                         light.getDirection().y,
                         light.getDirection().z
                 );
+
+                shader.setUniform(
+                        "uLightColor",
+                        light.getColor().x,
+                        light.getColor().y,
+                        light.getColor().z
+                );
+
+                shader.setUniform("uAmbientStrength", light.getAmbientStrength());
             }
 
             gameObject.getMesh().render();
