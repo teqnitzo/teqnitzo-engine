@@ -1,5 +1,6 @@
 package com.teqnitzo.engine;
 
+import com.teqnitzo.engine.audio.AudioEngine;
 import com.teqnitzo.engine.input.Input;
 import com.teqnitzo.engine.render.*;
 import com.teqnitzo.engine.scene.DirectionalLight;
@@ -14,12 +15,14 @@ public class Engine {
     private final Window window;
     private final Renderer renderer;
     private final Scene scene;
+    private final AudioEngine audioEngine;
     private boolean running;
 
     public Engine(String title, int width, int height) {
         this.window = new Window(title, width, height);
         this.renderer = new Renderer();
         this.scene = new Scene();
+        this.audioEngine = new AudioEngine();
         this.running = false;
     }
 
@@ -32,6 +35,7 @@ public class Engine {
     private void init() {
         window.init();
         renderer.init();
+        audioEngine.init();
         renderer.resize(window.getWidth(), window.getHeight());
         createScene();
         running = true;
@@ -137,6 +141,7 @@ public class Engine {
     }
 
     private void shutdown() {
+        audioEngine.cleanup();
         ResourceManager.clear();
         window.destroy();
     }
