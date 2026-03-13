@@ -2,9 +2,11 @@ package com.teqnitzo.engine;
 
 import com.teqnitzo.engine.input.Input;
 import com.teqnitzo.engine.render.*;
+import com.teqnitzo.engine.scene.DirectionalLight;
 import com.teqnitzo.engine.scene.GameObject;
 import com.teqnitzo.engine.scene.RotatingCube;
 import com.teqnitzo.engine.scene.Scene;
+import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
 public class Engine {
@@ -40,6 +42,8 @@ public class Engine {
         Shader shader = ResourceManager.getShader("basic", "/shaders/basic.vert", "/shaders/basic.frag");
         Texture texture = ResourceManager.getTexture("crate", "/textures/crate.png");
         Material material = new Material(shader, texture);
+
+        scene.setDirectionalLight(new DirectionalLight(new Vector3f(-0.5f, -1.0f, -0.3f)));
 
         GameObject cube = new RotatingCube(mesh, material);
         scene.addGameObject(cube);

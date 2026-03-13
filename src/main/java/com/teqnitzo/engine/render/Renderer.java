@@ -1,5 +1,6 @@
 package com.teqnitzo.engine.render;
 
+import com.teqnitzo.engine.scene.DirectionalLight;
 import com.teqnitzo.engine.scene.GameObject;
 import com.teqnitzo.engine.scene.Scene;
 import org.joml.Matrix4f;
@@ -34,6 +35,8 @@ public class Renderer {
         Matrix4f view = camera.getViewMatrix();
         Matrix4f projection = camera.getProjectionMatrix();
 
+        DirectionalLight light = scene.getDirectionalLight();
+
         for (GameObject gameObject : scene.getGameObjects()) {
             Matrix4f model = gameObject.getTransform().getModelMatrix();
 
@@ -47,7 +50,15 @@ public class Renderer {
             material.bind();
 
             shader.setUniform("uMVP", mvp);
-            shader.setUniform("uLightDir", -0.5f, -1.0f, -0.3f);
+
+            if (light != null) {
+                shader.setUniform(
+                        "uLightDir",
+                        light.getDirection().x,
+                        light.getDirection().y,
+                        light.getDirection().z
+                );
+            }
 
             gameObject.getMesh().render();
 
