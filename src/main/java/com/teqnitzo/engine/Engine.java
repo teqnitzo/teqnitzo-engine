@@ -1,6 +1,7 @@
 package com.teqnitzo.engine;
 
 import com.teqnitzo.engine.audio.AudioEngine;
+import com.teqnitzo.engine.audio.SoundBuffer;
 import com.teqnitzo.engine.input.Input;
 import com.teqnitzo.engine.render.*;
 import com.teqnitzo.engine.scene.DirectionalLight;
@@ -17,6 +18,7 @@ public class Engine {
     private final Scene scene;
     private final AudioEngine audioEngine;
     private boolean running;
+    private SoundBuffer testSound;
 
     public Engine(String title, int width, int height) {
         this.window = new Window(title, width, height);
@@ -36,6 +38,14 @@ public class Engine {
         window.init();
         renderer.init();
         audioEngine.init();
+
+        try {
+            testSound = new SoundBuffer("/audio/test.ogg");
+            System.out.println("Sound loaded: " + testSound.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         renderer.resize(window.getWidth(), window.getHeight());
         createScene();
         running = true;
@@ -141,6 +151,10 @@ public class Engine {
     }
 
     private void shutdown() {
+        if (testSound != null) {
+            testSound.cleanup();
+        }
+
         audioEngine.cleanup();
         ResourceManager.clear();
         window.destroy();
