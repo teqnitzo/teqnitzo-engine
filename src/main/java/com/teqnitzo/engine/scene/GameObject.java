@@ -2,17 +2,17 @@ package com.teqnitzo.engine.scene;
 
 import com.teqnitzo.engine.math.Transform;
 import com.teqnitzo.engine.render.Material;
-import com.teqnitzo.engine.render.Mesh;
+import com.teqnitzo.engine.render.Model;
 
 public class GameObject {
 
     private final Transform transform;
-    private final Mesh mesh;
+    private final Model model;
     private final Material material;
 
-    public GameObject(Mesh mesh, Material material) {
+    public GameObject(Model model, Material material) {
         this.transform = new Transform();
-        this.mesh = mesh;
+        this.model = model;
         this.material = material;
     }
 
@@ -23,8 +23,8 @@ public class GameObject {
         return transform;
     }
 
-    public Mesh getMesh() {
-        return mesh;
+    public Model getModel() {
+        return model;
     }
 
     public Material getMaterial() {

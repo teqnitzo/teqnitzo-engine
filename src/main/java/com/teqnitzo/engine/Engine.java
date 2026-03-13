@@ -38,8 +38,7 @@ public class Engine {
     }
 
     private void createScene() {
-        MeshData meshData = ObjLoader.load("/models/cube.obj");
-        Mesh mesh = new Mesh(meshData);
+        Model model = ModelLoader.loadObj("/models/cube.obj");
         Shader shader = ResourceManager.getShader("basic", "/shaders/basic.vert", "/shaders/basic.frag");
         Texture texture = ResourceManager.getTexture("crate", "/textures/crate.png");
         Material material = new Material(shader, texture);
@@ -52,8 +51,12 @@ public class Engine {
                 )
         );
 
-        GameObject model = new RotatingObject(mesh, material);
-        scene.addGameObject(model);
+        GameObject cube = new RotatingObject(model, material);
+        scene.addGameObject(cube);
+
+        GameObject cube2 = new RotatingObject(model, material);
+        cube2.getTransform().position.set(4.0f, 0.0f, 0.0f);
+        scene.addGameObject(cube2);
     }
 
     private void loop() {

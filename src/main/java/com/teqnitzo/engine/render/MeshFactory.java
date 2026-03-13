@@ -5,7 +5,7 @@ public final class MeshFactory {
     private MeshFactory() {
     }
 
-    public static Mesh createTexturedLitCube() {
+    public static Model createTexturedLitCube() {
         float[] vertices = {
                 // front
                 -0.5f,  0.5f,  0.5f, 1f, 1f, 1f, 0f, 1f, 0f, 0f, 1f,
@@ -53,6 +53,8 @@ public final class MeshFactory {
                 20, 21, 22, 22, 23, 20
         };
 
-        return new Mesh(vertices, indices);
+        Model model = new Model();
+        model.addMesh(new Mesh(vertices, indices));
+        return model;
     }
 }

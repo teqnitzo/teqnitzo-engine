@@ -69,7 +69,9 @@ public class Renderer {
                 shader.setUniform("uAmbientStrength", light.getAmbientStrength());
             }
 
-            gameObject.getMesh().render();
+            for (Mesh mesh : gameObject.getModel().getMeshes()) {
+                mesh.render();
+            }
 
             material.unbind();
         }

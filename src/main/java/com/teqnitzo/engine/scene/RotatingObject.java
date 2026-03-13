@@ -1,12 +1,12 @@
 package com.teqnitzo.engine.scene;
 
 import com.teqnitzo.engine.render.Material;
-import com.teqnitzo.engine.render.Mesh;
+import com.teqnitzo.engine.render.Model;
 
 public class RotatingObject extends GameObject {
 
-    public RotatingObject(Mesh mesh, Material material) {
-        super(mesh, material);
+    public RotatingObject(Model model, Material material) {
+        super(model, material);
     }
 
     @Override
