@@ -4,7 +4,7 @@ import com.teqnitzo.engine.input.Input;
 import com.teqnitzo.engine.render.*;
 import com.teqnitzo.engine.scene.DirectionalLight;
 import com.teqnitzo.engine.scene.GameObject;
-import com.teqnitzo.engine.scene.RotatingCube;
+import com.teqnitzo.engine.scene.RotatingObject;
 import com.teqnitzo.engine.scene.Scene;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
@@ -38,7 +38,8 @@ public class Engine {
     }
 
     private void createScene() {
-        Mesh mesh = MeshFactory.createTexturedLitCube();
+        MeshData meshData = ObjLoader.load("/models/cube.obj");
+        Mesh mesh = new Mesh(meshData);
         Shader shader = ResourceManager.getShader("basic", "/shaders/basic.vert", "/shaders/basic.frag");
         Texture texture = ResourceManager.getTexture("crate", "/textures/crate.png");
         Material material = new Material(shader, texture);
@@ -51,12 +52,8 @@ public class Engine {
                 )
         );
 
-        GameObject cube = new RotatingCube(mesh, material);
-        scene.addGameObject(cube);
-
-        GameObject cube2 = new RotatingCube(mesh, material);
-        cube2.getTransform().position.set(2.0f, 0.0f, 0.0f);
-        scene.addGameObject(cube2);
+        GameObject model = new RotatingObject(mesh, material);
+        scene.addGameObject(model);
     }
 
     private void loop() {

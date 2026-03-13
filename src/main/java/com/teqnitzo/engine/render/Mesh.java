@@ -55,6 +55,10 @@ public class Mesh {
         GL30.glBindVertexArray(0);
     }
 
+    public Mesh(MeshData meshData) {
+        this(meshData.getVertices(), meshData.getIndices());
+    }
+
     public void render() {
         GL30.glBindVertexArray(vao);
         GL30.glDrawElements(GL30.GL_TRIANGLES, indexCount, GL30.GL_UNSIGNED_INT, 0);

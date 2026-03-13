@@ -3,9 +3,9 @@ package com.teqnitzo.engine.scene;
 import com.teqnitzo.engine.render.Material;
 import com.teqnitzo.engine.render.Mesh;
 
-public class RotatingCube extends GameObject {
+public class RotatingObject extends GameObject {
 
-    public RotatingCube(Mesh mesh, Material material) {
+    public RotatingObject(Mesh mesh, Material material) {
         super(mesh, material);
     }
 
