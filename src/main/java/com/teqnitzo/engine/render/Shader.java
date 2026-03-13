@@ -101,4 +101,8 @@ public class Shader {
 
         GL20.glUniform3f(location, x, y, z);
     }
+
+    public void destroy() {
+        GL20.glDeleteProgram(programId);
+    }
 }

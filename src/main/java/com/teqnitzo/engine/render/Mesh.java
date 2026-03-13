@@ -60,4 +60,10 @@ public class Mesh {
         GL30.glDrawElements(GL30.GL_TRIANGLES, indexCount, GL30.GL_UNSIGNED_INT, 0);
         GL30.glBindVertexArray(0);
     }
+
+    public void destroy() {
+        GL30.glDeleteVertexArrays(vao);
+        GL15.glDeleteBuffers(vbo);
+        GL15.glDeleteBuffers(ebo);
+    }
 }

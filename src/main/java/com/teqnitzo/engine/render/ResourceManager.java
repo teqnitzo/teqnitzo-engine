@@ -30,6 +30,15 @@ public final class ResourceManager {
     }
 
     public static void clear() {
+
+        for (Shader shader : shaders.values()) {
+            shader.destroy();
+        }
+
+        for (Texture texture : textures.values()) {
+            texture.destroy();
+        }
+
         shaders.clear();
         textures.clear();
     }

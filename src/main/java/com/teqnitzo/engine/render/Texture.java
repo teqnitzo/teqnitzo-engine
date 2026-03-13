@@ -58,6 +58,10 @@ public class Texture {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, id);
     }
 
+    public void destroy() {
+        GL11.glDeleteTextures(id);
+    }
+
     private ByteBuffer loadResource(String resourcePath) {
         try (InputStream inputStream = Texture.class.getResourceAsStream(resourcePath)) {
             if (inputStream == null) {

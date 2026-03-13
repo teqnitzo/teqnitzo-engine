@@ -27,4 +27,8 @@ public class Material {
     public void unbind() {
         shader.unbind();
     }
+
+    public void destroy() {
+        // пока пусто
+    }
 }
