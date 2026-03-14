@@ -1,5 +1,7 @@
 package com.teqnitzo.engine.render;
 
+import com.teqnitzo.engine.audio.SoundBuffer;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ public final class ResourceManager {
     private static final Map<String, Shader> shaders = new HashMap<>();
     private static final Map<String, Texture> textures = new HashMap<>();
     private static final Map<String, Model> models = new HashMap<>();
+    private static final Map<String, SoundBuffer> sounds = new HashMap<>();
 
     private ResourceManager() {
     }
@@ -39,6 +42,21 @@ public final class ResourceManager {
         return model;
     }
 
+    public static SoundBuffer getSound(String name, String path) {
+
+        if (sounds.containsKey(name)) {
+            return sounds.get(name);
+        }
+
+        try {
+            SoundBuffer sound = new SoundBuffer(path);
+            sounds.put(name, sound);
+            return sound;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load sound: " + path, e);
+        }
+    }
+
     public static void clear() {
         for (Shader shader : shaders.values()) {
             shader.destroy();
@@ -52,6 +70,11 @@ public final class ResourceManager {
             model.destroy();
         }
 
+        for (SoundBuffer sound : sounds.values()) {
+            sound.cleanup();
+        }
+
+        sounds.clear();
         shaders.clear();
         textures.clear();
         models.clear();

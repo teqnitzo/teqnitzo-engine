@@ -16,8 +16,8 @@ public class Engine {
     private final Renderer renderer;
     private final Scene scene;
     private final AudioEngine audioEngine;
+    private final AudioSystem audioSystem;
     private boolean running;
-    private SoundBuffer testSound;
     private AudioListener audioListener;
 
     public Engine(String title, int width, int height) {
@@ -25,6 +25,7 @@ public class Engine {
         this.renderer = new Renderer();
         this.scene = new Scene();
         this.audioEngine = new AudioEngine();
+        this.audioSystem = new AudioSystem();
         this.audioListener = new AudioListener();
         this.running = false;
     }
@@ -40,13 +41,6 @@ public class Engine {
         renderer.init();
         audioEngine.init();
 
-        try {
-            testSound = new SoundBuffer("/audio/test.ogg");
-            System.out.println("Sound loaded: " + testSound.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         renderer.resize(window.getWidth(), window.getHeight());
         createScene();
         running = true;
@@ -58,6 +52,7 @@ public class Engine {
         Shader shader = ResourceManager.getShader("basic", "/shaders/basic.vert", "/shaders/basic.frag");
         Texture texture = ResourceManager.getTexture("crate", "/textures/crate.png");
         Material material = new Material(shader, texture);
+        SoundBuffer testSound = ResourceManager.getSound("test", "/audio/test.ogg");
 
         scene.setDirectionalLight(
                 new DirectionalLight(
@@ -70,7 +65,6 @@ public class Engine {
         GameObject cube = new RotatingObject(cubeModel, material);
         cube.getTransform().position.set(-2.0f, 0.0f, 0.0f);
         cube.setAudioComponent(new AudioComponent(testSound, true, true));
-
         scene.addGameObject(cube);
     }
 
@@ -114,6 +108,12 @@ public class Engine {
         if (Input.isKeyDown(GLFW.GLFW_KEY_ESCAPE)) {
             running = false;
         }
+        if (Input.isKeyPressed(GLFW.GLFW_KEY_SPACE)) {
+            audioSystem.playAt(
+                    ResourceManager.getSound("test", "/audio/test.ogg"),
+                    new Vector3f(0.0f, 0.0f, -3.0f)
+            );
+        }
     }
 
     private void update(float deltaTime) {
@@ -146,6 +146,7 @@ public class Engine {
         );
 
         scene.update(deltaTime);
+        audioSystem.update();
 
         Input.endFrame();
     }
@@ -156,11 +157,7 @@ public class Engine {
 
     private void shutdown() {
         scene.cleanup();
-
-        if (testSound != null) {
-            testSound.cleanup();
-        }
-
+        audioSystem.cleanup();
         audioEngine.cleanup();
         ResourceManager.clear();
         window.destroy();
