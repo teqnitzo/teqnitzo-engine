@@ -3,10 +3,7 @@ package com.teqnitzo.engine;
 import com.teqnitzo.engine.audio.*;
 import com.teqnitzo.engine.input.Input;
 import com.teqnitzo.engine.render.*;
-import com.teqnitzo.engine.scene.DirectionalLight;
-import com.teqnitzo.engine.scene.GameObject;
-import com.teqnitzo.engine.scene.RotatingObject;
-import com.teqnitzo.engine.scene.Scene;
+import com.teqnitzo.engine.scene.*;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
@@ -62,8 +59,9 @@ public class Engine {
                 )
         );
 
-        GameObject cube = new RotatingObject(cubeModel, material);
+        GameObject cube = new GameObject(cubeModel, material);
         cube.getTransform().position.set(-2.0f, 0.0f, 0.0f);
+        cube.addComponent(new RotatorComponent(new Vector3f(0.5f, 1.0f, 0.0f)));
         cube.addComponent(new AudioComponent(testSound, true, true));
         scene.addGameObject(cube);
     }
