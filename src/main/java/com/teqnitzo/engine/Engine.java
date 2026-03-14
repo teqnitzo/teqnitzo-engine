@@ -64,7 +64,7 @@ public class Engine {
 
         GameObject cube = new RotatingObject(cubeModel, material);
         cube.getTransform().position.set(-2.0f, 0.0f, 0.0f);
-        cube.setAudioComponent(new AudioComponent(testSound, true, true));
+        cube.addComponent(new AudioComponent(testSound, true, true));
         scene.addGameObject(cube);
     }
 

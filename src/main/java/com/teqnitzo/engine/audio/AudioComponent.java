@@ -1,8 +1,8 @@
 package com.teqnitzo.engine.audio;
 
-import com.teqnitzo.engine.scene.GameObject;
+import com.teqnitzo.engine.scene.Component;
 
-public class AudioComponent {
+public class AudioComponent extends Component {
 
     private final SoundBuffer soundBuffer;
     private final SoundSource soundSource;
@@ -22,13 +22,17 @@ public class AudioComponent {
         soundSource.setRolloffFactor(1.0f);
     }
 
-    public void update(GameObject owner) {
-        soundSource.setPosition(owner.getTransform().position);
-
+    @Override
+    public void start() {
         if (playOnStart && !started) {
             soundSource.play();
             started = true;
         }
+    }
+
+    @Override
+    public void update(float deltaTime) {
+        soundSource.setPosition(gameObject.getTransform().position);
     }
 
     public void play() {
@@ -56,6 +60,7 @@ public class AudioComponent {
         return soundBuffer;
     }
 
+    @Override
     public void cleanup() {
         soundSource.cleanup();
     }
