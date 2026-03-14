@@ -1,9 +1,6 @@
 package com.teqnitzo.engine;
 
-import com.teqnitzo.engine.audio.AudioEngine;
-import com.teqnitzo.engine.audio.AudioListener;
-import com.teqnitzo.engine.audio.SoundBuffer;
-import com.teqnitzo.engine.audio.SoundSource;
+import com.teqnitzo.engine.audio.*;
 import com.teqnitzo.engine.input.Input;
 import com.teqnitzo.engine.render.*;
 import com.teqnitzo.engine.scene.DirectionalLight;
@@ -21,7 +18,6 @@ public class Engine {
     private final AudioEngine audioEngine;
     private boolean running;
     private SoundBuffer testSound;
-    private SoundSource testSource;
     private AudioListener audioListener;
 
     public Engine(String title, int width, int height) {
@@ -46,18 +42,7 @@ public class Engine {
 
         try {
             testSound = new SoundBuffer("/audio/test.ogg");
-            testSource = new SoundSource();
-            testSource.setBuffer(testSound.getId());
-            testSource.setLooping(true);
-            testSource.setRelative(false);
-            testSource.setPosition(5.0f, 0.0f, 0.0f);
-            testSource.setReferenceDistance(1.0f);
-            testSource.setMaxDistance(30.0f);
-            testSource.setRolloffFactor(1.0f);
-            testSource.play();
-
             System.out.println("Sound loaded: " + testSound.getId());
-            System.out.println("Sound source created: " + testSource.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,7 +54,6 @@ public class Engine {
 
     private void createScene() {
         Model cubeModel = MeshFactory.createTexturedLitCube();
-        Model objModel = ResourceManager.getObjModel("cube", "/models/cube.obj");
 
         Shader shader = ResourceManager.getShader("basic", "/shaders/basic.vert", "/shaders/basic.frag");
         Texture texture = ResourceManager.getTexture("crate", "/textures/crate.png");
@@ -85,11 +69,9 @@ public class Engine {
 
         GameObject cube = new RotatingObject(cubeModel, material);
         cube.getTransform().position.set(-2.0f, 0.0f, 0.0f);
-        scene.addGameObject(cube);
+        cube.setAudioComponent(new AudioComponent(testSound, true, true));
 
-        GameObject cubeObj = new RotatingObject(objModel, material);
-        cubeObj.getTransform().position.set(2.0f, 0.0f, 0.0f);
-        scene.addGameObject(cubeObj);
+        scene.addGameObject(cube);
     }
 
     private void loop() {
@@ -173,9 +155,7 @@ public class Engine {
     }
 
     private void shutdown() {
-        if (testSource != null) {
-            testSource.cleanup();
-        }
+        scene.cleanup();
 
         if (testSound != null) {
             testSound.cleanup();

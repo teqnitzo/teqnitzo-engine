@@ -11,6 +11,8 @@ public class RotatingObject extends GameObject {
 
     @Override
     public void update(float deltaTime) {
+        super.update(deltaTime);
+
         getTransform().rotation.y += deltaTime;
         getTransform().rotation.x += deltaTime * 0.5f;
     }

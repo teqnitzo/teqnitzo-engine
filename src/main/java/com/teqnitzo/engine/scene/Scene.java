@@ -29,4 +29,10 @@ public class Scene {
     public void setDirectionalLight(DirectionalLight directionalLight) {
         this.directionalLight = directionalLight;
     }
+
+    public void cleanup() {
+        for (GameObject gameObject : gameObjects) {
+            gameObject.cleanup();
+        }
+    }
 }
