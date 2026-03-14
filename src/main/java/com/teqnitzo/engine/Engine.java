@@ -1,6 +1,7 @@
 package com.teqnitzo.engine;
 
 import com.teqnitzo.engine.audio.AudioEngine;
+import com.teqnitzo.engine.audio.AudioListener;
 import com.teqnitzo.engine.audio.SoundBuffer;
 import com.teqnitzo.engine.audio.SoundSource;
 import com.teqnitzo.engine.input.Input;
@@ -21,12 +22,14 @@ public class Engine {
     private boolean running;
     private SoundBuffer testSound;
     private SoundSource testSource;
+    private AudioListener audioListener;
 
     public Engine(String title, int width, int height) {
         this.window = new Window(title, width, height);
         this.renderer = new Renderer();
         this.scene = new Scene();
         this.audioEngine = new AudioEngine();
+        this.audioListener = new AudioListener();
         this.running = false;
     }
 
@@ -46,6 +49,11 @@ public class Engine {
             testSource = new SoundSource();
             testSource.setBuffer(testSound.getId());
             testSource.setLooping(true);
+            testSource.setRelative(false);
+            testSource.setPosition(5.0f, 0.0f, 0.0f);
+            testSource.setReferenceDistance(1.0f);
+            testSource.setMaxDistance(30.0f);
+            testSource.setRolloffFactor(1.0f);
             testSource.play();
 
             System.out.println("Sound loaded: " + testSound.getId());
@@ -148,6 +156,12 @@ public class Engine {
 
         renderer.getCamera().addYaw(Input.getDeltaX() * mouseSensitivity);
         renderer.getCamera().addPitch(Input.getDeltaY() * mouseSensitivity);
+
+        audioListener.setPosition(renderer.getCamera().getPosition());
+        audioListener.setOrientation(
+                renderer.getCamera().getForward(),
+                renderer.getCamera().getUp()
+        );
 
         scene.update(deltaTime);
 

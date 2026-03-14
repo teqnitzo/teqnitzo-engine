@@ -87,7 +87,23 @@ public class Camera {
         this.aspectRatio = aspectRatio;
     }
 
+    public Vector3f getForward() {
+        Vector3f forward = new Vector3f();
+
+        forward.x = (float) (Math.cos(pitch) * Math.sin(yaw));
+        forward.y = (float) Math.sin(pitch);
+        forward.z = (float) -(Math.cos(pitch) * Math.cos(yaw));
+
+        return forward.normalize();
+    }
+
+    public Vector3f getUp() {
+        Vector3f forward = getForward();
+        Vector3f right = new Vector3f(forward).cross(0.0f, 1.0f, 0.0f).normalize();
+        return new Vector3f(right).cross(forward).normalize();
+    }
+
     public Vector3f getPosition() {
-        return position;
+        return new Vector3f(position);
     }
 }
