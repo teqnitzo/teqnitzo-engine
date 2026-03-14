@@ -23,9 +23,13 @@ public class SoundBuffer {
             IntBuffer channels = stack.mallocInt(1);
             IntBuffer sampleRate = stack.mallocInt(1);
 
-            ByteBuffer rawAudioBuffer = WavLoader.load(path);
+            ByteBuffer rawAudioBuffer = AudioLoader.load(path);
 
             ShortBuffer pcm = stb_vorbis_decode_memory(rawAudioBuffer, channels, sampleRate);
+
+            if (pcm == null) {
+                throw new RuntimeException("Failed to decode OGG: " + path);
+            }
 
             int format = channels.get(0) == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
 

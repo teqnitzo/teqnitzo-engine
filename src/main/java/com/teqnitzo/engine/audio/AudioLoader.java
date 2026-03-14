@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-public class WavLoader {
+public class AudioLoader {
 
     public static ByteBuffer load(String resourcePath) throws IOException {
-        try (InputStream stream = WavLoader.class.getResourceAsStream(resourcePath)) {
+        try (InputStream stream = AudioLoader.class.getResourceAsStream(resourcePath)) {
 
             if (stream == null) {
                 throw new IOException("Sound file not found: " + resourcePath);
